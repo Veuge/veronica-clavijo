@@ -1,7 +1,9 @@
 import * as React from "react";
-import { graphql } from "gatsby";
 
 import Info from "../components/Info";
+import "@fontsource/ibm-plex-sans";
+import Navbar from "../components/Navbar";
+import PostPreview from "../components/PostPreview";
 
 // markup
 const IndexPage = (props) => {
@@ -9,20 +11,11 @@ const IndexPage = (props) => {
   return (
     <main>
       <title>Veronica Clavijo</title>
-      <h1>Hello</h1>
+      <Navbar />
       <Info />
+      <PostPreview />
     </main>
   )
-}
-
-export const query = graphql`
-  query ProfilePhoto {
-    file(relativePath: {eq: "profile.jpeg"}) {
-      childImageSharp {
-        gatsbyImageData(layout: CONSTRAINED, placeholder: DOMINANT_COLOR, formats: [AUTO, WEBP])
-      }
-    }
-  }
-`;
+};
 
 export default IndexPage
