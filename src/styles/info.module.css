@@ -1,6 +1,6 @@
+/* mobile */
 .infoContainer {
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
   border: 1px solid red;
+  display: flex;
+  padding: 12px;
 }

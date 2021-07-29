@@ -14,16 +14,15 @@ import * as styles from "../styles/info.module.css";
 export default function Info(props) {
   const { file, site } = useStaticQuery(graphql`
     query MainQuery {
-      file(relativePath: { eq: "profile.jpeg" }) {
+      file(relativePath: {eq: "profile.jpeg"}) {
         childImageSharp {
           gatsbyImageData(
             layout: CONSTRAINED
             placeholder: DOMINANT_COLOR
             formats: [AUTO, WEBP]
+            width: 50
+            height: 50
           )
-          fluid(maxWidth: 50) {
-            base64
-          }
         }
       }
       site {
@@ -46,22 +45,29 @@ export default function Info(props) {
 
   return (
     <section className={styles.infoContainer}>
-      <GatsbyImage image={getImage(file)} alt={"hey"} loading="lazy" />
-      <h1>{site.siteMetadata.author}</h1>
-      <h4>{site.siteMetadata.description}</h4>
-      <div>
-        <a target="_blank" href={site.siteMetadata.links.twitter}>
-          <FontAwesomeIcon icon={faTwitter} />
-        </a>
-        <a target="_blank" href={site.siteMetadata.links.github}>
-          <FontAwesomeIcon icon={faGithub} />
-        </a>
-        <a target="_blank" href={site.siteMetadata.links.linkedin}>
-          <FontAwesomeIcon icon={faLinkedin} />
-        </a>
-        <a target="_blank" href={`mailto:${site.siteMetadata.links.email}`}>
-          <FontAwesomeIcon icon={faEnvelope} />
-        </a>
+      <GatsbyImage
+        image={getImage(file)}
+        alt={"hey"}
+        loading="lazy"
+        style={{ borderRadius: "50%" }}
+      />
+      <div className={styles.info}>
+        <h1>{site.siteMetadata.author}</h1>
+        <h4>{site.siteMetadata.description}</h4>
+        <div>
+          <a target="_blank" href={site.siteMetadata.links.twitter}>
+            <FontAwesomeIcon icon={faTwitter} />
+          </a>
+          <a target="_blank" href={site.siteMetadata.links.github}>
+            <FontAwesomeIcon icon={faGithub} />
+          </a>
+          <a target="_blank" href={site.siteMetadata.links.linkedin}>
+            <FontAwesomeIcon icon={faLinkedin} />
+          </a>
+          <a target="_blank" href={`mailto:${site.siteMetadata.links.email}`}>
+            <FontAwesomeIcon icon={faEnvelope} />
+          </a>
+        </div>
       </div>
     </section>
   );
