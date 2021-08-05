@@ -1,0 +1,44 @@
+// Mobile
+.infoContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 30px;
+  align-items: center;
+  border: 1px dashed var(--greenish);
+  text-align: center;
+  max-width: 60%;
+  
+  .contactContainer {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 8px 0;
+  }
+
+  .avatar {
+    border-radius: 50%;
+    box-shadow: 1rem 1rem 1rem #000;
+  }
+
+  h1 {
+    font-size: 28px;
+    font-weight: bold;
+    text-shadow: 0.1rem 0.1rem 0.1rem #000;
+  }
+
+  h4 {
+    margin-bottom: 8px;
+  }
+}
+
+// Tablet
+@media screen and (min-width: 768px) {
+  .infoContainer {
+    flex-direction: row;
+  }
+
+  .info {
+    padding-left: 25px;
+    flex: 1;
+    text-align: left;
+  }
+}

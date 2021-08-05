@@ -9,7 +9,7 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 
-import * as styles from "../styles/info.module.css";
+import * as styles from "../styles/info.module.scss";
 
 export default function Info(props) {
   const { file, site } = useStaticQuery(graphql`
@@ -49,22 +49,22 @@ export default function Info(props) {
         image={getImage(file)}
         alt={"hey"}
         loading="lazy"
-        style={{ borderRadius: "50%" }}
+        className={styles.avatar}
       />
       <div className={styles.info}>
         <h1>{site.siteMetadata.author}</h1>
         <h4>{site.siteMetadata.description}</h4>
         <div className={styles.contactContainer}>
-          <a target="_blank" href={site.siteMetadata.links.twitter}>
+          <a target="_blank" href={site.siteMetadata.links.twitter} rel="noreferrer">
             <FontAwesomeIcon icon={faTwitter} />
           </a>
-          <a target="_blank" href={site.siteMetadata.links.github}>
+          <a target="_blank" href={site.siteMetadata.links.github} rel="noreferrer">
             <FontAwesomeIcon icon={faGithub} />
           </a>
-          <a target="_blank" href={site.siteMetadata.links.linkedin}>
+          <a target="_blank" href={site.siteMetadata.links.linkedin} rel="noreferrer">
             <FontAwesomeIcon icon={faLinkedin} />
           </a>
-          <a target="_blank" href={`mailto:${site.siteMetadata.links.email}`}>
+          <a target="_blank" href={`mailto:${site.siteMetadata.links.email}`} rel="noreferrer">
             <FontAwesomeIcon icon={faEnvelope} />
           </a>
         </div>
