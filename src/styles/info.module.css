@@ -1,6 +1,17 @@
 /* mobile */
 .infoContainer {
-  border: 1px solid red;
   display: flex;
-  padding: 12px;
+  padding: 8px 12px;
+  align-items: center;
+  border-bottom: 1px solid var(--lavanda);
+}
+
+.info {
+  padding-left: 12px;
+}
+
+.contactContainer {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 8px 0;
 }

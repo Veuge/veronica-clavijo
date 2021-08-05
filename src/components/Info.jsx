@@ -20,8 +20,8 @@ export default function Info(props) {
             layout: CONSTRAINED
             placeholder: DOMINANT_COLOR
             formats: [AUTO, WEBP]
-            width: 50
-            height: 50
+            width: 100
+            height: 100
           )
         }
       }
@@ -54,7 +54,7 @@ export default function Info(props) {
       <div className={styles.info}>
         <h1>{site.siteMetadata.author}</h1>
         <h4>{site.siteMetadata.description}</h4>
-        <div>
+        <div className={styles.contactContainer}>
           <a target="_blank" href={site.siteMetadata.links.twitter}>
             <FontAwesomeIcon icon={faTwitter} />
           </a>
