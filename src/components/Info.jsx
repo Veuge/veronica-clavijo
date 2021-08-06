@@ -41,8 +41,6 @@ export default function Info(props) {
     }
   `);
 
-  console.log({ file, site });
-
   return (
     <section className={styles.infoContainer}>
       <GatsbyImage

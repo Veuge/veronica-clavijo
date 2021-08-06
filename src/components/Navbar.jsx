@@ -5,7 +5,6 @@ import { composeClasses } from "../helpers";
 import * as styles from "../styles/navbar.module.scss";
 
 export default function Navbar() {
-  console.log(styles.navLink);
   return (
     <nav className={styles.navbar}>
       <div className={styles.nav}>
