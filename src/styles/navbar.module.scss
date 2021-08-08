@@ -24,7 +24,7 @@
       background-repeat: repeat-x;
       background-size: 2px 2px;
       transition: background-size .4s, text-shadow .1s;
-      &:hover {
+      &:hover, &.activeNavLink {
         background-size: 4px 50px;
         text-shadow:  0.1rem 0.1rem 0.1rem #000;
         color: white;
@@ -38,7 +38,7 @@
       background-repeat: repeat-x;
       background-size: 2px 2px;
       transition: background-size .4s, text-shadow .1s;
-      &:hover {
+      &:hover, &.activeNavLink {
         background-size: 4px 50px;
         color: white;
         text-shadow:  0.1rem 0.1rem 0.1rem #000;
@@ -52,7 +52,7 @@
       background-repeat: repeat-x;
       background-size: 2px 2px;
       transition: background-size .4s, text-shadow .1s;
-      &:hover {
+      &:hover, &.activeNavLink {
         background-size: 4px 50px;
         color: white;
         text-shadow:  0.1rem 0.1rem 0.1rem #000;
