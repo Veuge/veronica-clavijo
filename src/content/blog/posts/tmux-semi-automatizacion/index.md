@@ -1,0 +1,142 @@
+---
+title: "Semi-automatización de TMUX"
+date: "2020-11-21"
+description: "Cómo semi-automatizar el inicio de sesión de TMUX con una configuración de específica de paneles y sus tareas con un solo comando!."
+tags: ["consola"]
+---
+
+Desde hace tiempo que uso [TMUX](https://github.com/tmux/tmux) para hacer mas efectivo y fluido mi tiempo en la terminal.
+
+Como en el trabajo paso la mayor parte del tiempo desarrollando una app en React Native mi configuracion de TMUX luce siempre igual y los paneles los uso para los mismos propósitos. Mis sesiones se ven asi:
+
+```sh
+ ------------------------------
+|      1       |               |
+ --------------|       3       |
+|      2       |               |
+ ------------------------------
+```
+El panel 1 se mantiene estático corriendo el metro-bundler de la app.
+
+El panel 2 lo utilizo para ejecutar `npx react-native run-{platform}` y para comandos git.
+
+El panel 3 tiene el emulador corriendo.
+
+Normalmente iniciaba tmux y manualmente construía los paneles e iniciaba las mismas tareas en cada panel, se hizo repetitivo hacerlo a diario.
+
+Investigando un poco descubrí que puedo lograr la disposición de los paneles y las tareas de cada uno con un simple comando al momento de iniciar la sesión TMUX. Entonces esas son mis dos metas, lograr la estructura del layout e iniciar las tareas en cada panel.
+
+## Paneles en proceso...
+Para lograr el layout de **manera manual** siempre sigo los siguientes pasos:
+```sh
+$ tmux          # Inicia sesión TMUX
+C-b %           # Divide la pantalla en 2 verticalmente
+C-b q 1         # Regresa a la primera mitad
+C-b "           # Divide el primer panel en 2 horizontalmente
+```
+
+Para lograr el layout desde el momento que se inicia la sesión TMUX la sintaxis es diferente ya que en ese momento no se tiene acceso a los atajos de teclado como son `C-b`y `M-x`, pero tenemos comandos de tmux, necesitamos inicialmente dos (`split-window` y `select-pane`). Como prueba inicial tendremos:
+
+```sh
+$ tmux new-session \; \
+split-window -h
+
+# Resultado
+ ------------------------------
+|              |               |
+|      1       |       2       |
+|              |               |
+ ------------------------------
+```
+El argumento `-h` indica que la ventana se dividirá en dos paneles de manera horizontal, el siguiente paso es dividir el Panel 1 en dos paneles verticalmente, por lo que complementando el comando es:
+
+```sh
+$ tmux new-session \; \
+split-window -h \; \
+split-window -v \;
+
+# Resultado
+ ------------------------------
+|              |       2       |
+|      1       |---------------|
+|              |       3       |
+ ------------------------------
+```
+
+El resultado obtenido hasta el momento no es exactamente lo que busco, pero hay que tomar en cuenta la manera como TMUX funciona, una vez que se divide la pantalla en paneles TMUX escoge el panel activo:
+- cuando se divide horizontalmente el panel activo es el de la derecha
+- cuando se divide verticalmente el panel activo es el de abajo.
+
+En este caso dado que tenía dos paneles (1 y 2) separados horizontalmente, el siguiente `split-window` dividirá el panel 2. La solución es seleccionar manualmente el panel 1 antes de dividirlo verticalmente usando el comando `select-pane` como sigue:
+
+```sh
+$ tmux new-session \; \
+split-window -h \; \
+select-pane -t 1 \; \
+split-window -v \;
+
+# Resultado
+ ------------------------------
+|      1       |               |
+ --------------|       3       |
+|      2       |               |
+ ------------------------------
+```
+
+🎉🎉🎉 Listo!, el layout es como quiero...
+
+## Inicio de tareas en cada panel
+Ya que el layout está listo ahora queda iniciar las tareas en cada panel.
+- Panel 1 para iniciar el metro bundler
+- Panel 2 para ejecutar `npx react-native run-{platform}`
+- Panel 3 para ejecutar el emulador
+
+Para lograrlo se utiliza el comando `send-keys` seguido de `C-m` que es un parámetro que ejecuta el comando. Cada que se cree un panel iniciaremos su tarea.
+
+```sh
+$ tmux new-session \; \
+send-keys 'yarn && yarn start' C-m \; \
+split-window -h \; \
+send-keys 'androidemu @Pixel3a' C-m \; \
+select-pane -t 1 \; \
+split-window -v \; \
+send-keys 'npx react-native run-android' C-m \;
+```
+
+🎉🎉🎉 Listo! añadiendo `send-keys` cuando se crea cada panel se inicia la tarea de cada uno. Ahora cada vez que quiero iniciar TMUX para trabajar en la app de react-native solo tengo que copiar y pegar ese ultimo comando en una terminal que este en el directorio raiz del proyecto.
+
+## Mejoras
+Hay un par de detalles que se pueden mejorar, la primera es que tengo que cambiar de directorio a la raiz del proyecto antes de copiar y pegar el comando de TMUX, eso se puede mejorar!. El comando `new-session` tiene disponible la bandera `-c` con la que se puede especificar el directorio en el cual se inicia la sesión de TMUX, aplicando esto tenemos:
+
+```sh
+$ tmux new-session -c /path/to/react-native-project \; \
+send-keys 'yarn && yarn start' C-m \; \
+split-window -h \; \
+send-keys 'androidemu @Pixel3a' C-m \; \
+select-pane -t 1 \; \
+split-window -v \; \
+send-keys 'npx react-native run-android' C-m \;
+```
+
+Con el uso de `-c` se ahorra el paso de tener que estar en la raiz del proyecto antes de copiar y pegar el comando de TMUX. Desde cualquier directorio en el que esté la terminal la sesión de TMUX iniciará en el proyecto deseado.
+
+La ultima mejora es darle un nombre a la sesión, la bandera `-n` de `new-session` hace justo esto:
+
+```sh
+$ tmux new-session -n tmux-rules -c /path/to/react-native-project \; \
+send-keys 'yarn && yarn start' C-m \; \
+split-window -h \; \
+send-keys 'androidemu @Pixel3a' C-m \; \
+select-pane -t 1 \; \
+split-window -v \; \
+send-keys 'npx react-native run-android' C-m \;
+```
+---
+**MISIÓN CUMPLIDA**
+
+Este [gist](https://gist.github.com/Veuge/4d460396bc459bf23093318f34a8186f) tiene el resultado final 
+
+## Referencias
+- [TMUX Wiki](https://github.com/tmux/tmux/wiki/Getting-Started)
+- [TMUX Man Page](https://man7.org/linux/man-pages/man1/tmux.1.html)
+- [Este hilo de StackOverflow](https://stackoverflow.com/questions/5609192/how-to-set-up-tmux-so-that-it-starts-up-with-specified-windows-opened)
