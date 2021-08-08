@@ -22,6 +22,7 @@ module.exports = {
     `gatsby-plugin-sharp`,
     `gatsby-transformer-sharp`, // Needed for dynamic images
     `gatsby-plugin-fontawesome-css`,
-    `gatsby-plugin-sass`
+    `gatsby-plugin-sass`,
+    `gatsby-plugin-mdx`
   ],
 };
