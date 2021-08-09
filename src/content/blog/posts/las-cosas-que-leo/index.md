@@ -1,6 +1,6 @@
 ---
 title: "Las cosas que leo"
-date: "2019-06-02"
+date: "2019-02-06"
 description: "Un resumen de los recursos que uso para leer noticias."
 ---
 

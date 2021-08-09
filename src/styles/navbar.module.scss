@@ -26,8 +26,8 @@
       transition: background-size .4s, text-shadow .1s;
       &:hover, &.activeNavLink {
         background-size: 4px 50px;
-        text-shadow:  0.1rem 0.1rem 0.1rem #000;
-        color: white;
+        text-shadow:  0.1rem 0.1rem 0.1rem var(--plainBlack);
+        color: var(--white);
       }
     }
     .navLinkRed {
@@ -40,8 +40,8 @@
       transition: background-size .4s, text-shadow .1s;
       &:hover, &.activeNavLink {
         background-size: 4px 50px;
-        color: white;
-        text-shadow:  0.1rem 0.1rem 0.1rem #000;
+        color: var(--white);
+        text-shadow:  0.1rem 0.1rem 0.1rem var(--plainBlack);
       }
     }
     .navLinkBlue {
@@ -54,8 +54,8 @@
       transition: background-size .4s, text-shadow .1s;
       &:hover, &.activeNavLink {
         background-size: 4px 50px;
-        color: white;
-        text-shadow:  0.1rem 0.1rem 0.1rem #000;
+        color: var(--white);
+        text-shadow:  0.1rem 0.1rem 0.1rem var(--plainBlack);
       }
     }
   }

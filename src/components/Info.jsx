@@ -11,7 +11,7 @@ import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 
 import * as styles from "../styles/info.module.scss";
 
-export default function Info(props) {
+export default function Info() {
   const { file, site } = useStaticQuery(graphql`
     query MainQuery {
       file(relativePath: {eq: "profile.jpeg"}) {
