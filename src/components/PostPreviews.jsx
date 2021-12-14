@@ -1,5 +1,5 @@
 import React from "react";
-import { graphql, useStaticQuery } from "gatsby";
+import { graphql, useStaticQuery, Link } from "gatsby";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsisV } from "@fortawesome/free-solid-svg-icons";
 
@@ -19,6 +19,7 @@ export default function PostPreview() {
               description
               tags
             }
+            slug
           }
         }
       }
@@ -28,25 +29,27 @@ export default function PostPreview() {
   return (
     <div className={styles.postPreviews}>
       {allMdx.edges.map(({ node }) => (
-        <article
-          className={styles.postPreviewContainer}
-          key={node.fileAbsolutePath}
-        >
-          <h1>{node.frontmatter.title}</h1>
-          <h3>{node.frontmatter.description}</h3>
-          <div className={styles.footerContainer}>
-            <span>{node.frontmatter.date}</span>
-            {!!node.frontmatter.tags && (
-              <>
-                <FontAwesomeIcon
-                  icon={faEllipsisV}
-                  className={styles.separatorIcon}
-                />
-                {node.frontmatter.tags.map((tag) => <Tag key={tag} tag={tag} />)}
-              </>
-            )}
-          </div>
-        </article>
+        <Link to={node.slug}>
+          <article
+            className={styles.postPreviewContainer}
+            key={node.fileAbsolutePath}
+          >
+            <h1>{node.frontmatter.title}</h1>
+            <h3>{node.frontmatter.description}</h3>
+            <div className={styles.footerContainer}>
+              <span>{node.frontmatter.date}</span>
+              {!!node.frontmatter.tags && (
+                <>
+                  <FontAwesomeIcon
+                    icon={faEllipsisV}
+                    className={styles.separatorIcon}
+                  />
+                  {node.frontmatter.tags.map((tag) => <Tag key={tag} tag={tag} />)}
+                </>
+              )}
+            </div>
+          </article>
+        </Link>
       ))}
     </div>
   );
