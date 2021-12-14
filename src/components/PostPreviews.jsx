@@ -36,12 +36,15 @@ export default function PostPreview() {
           <h3>{node.frontmatter.description}</h3>
           <div className={styles.footerContainer}>
             <span>{node.frontmatter.date}</span>
-            <FontAwesomeIcon
-              icon={faEllipsisV}
-              className={styles.separatorIcon}
-            />
-            {!!node.frontmatter.tags &&
-              node.frontmatter.tags.map((tag) => <Tag key={tag} tag={tag} />)}
+            {!!node.frontmatter.tags && (
+              <>
+                <FontAwesomeIcon
+                  icon={faEllipsisV}
+                  className={styles.separatorIcon}
+                />
+                {node.frontmatter.tags.map((tag) => <Tag key={tag} tag={tag} />)}
+              </>
+            )}
           </div>
         </article>
       ))}
