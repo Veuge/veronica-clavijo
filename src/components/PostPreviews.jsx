@@ -25,11 +25,11 @@ export default function PostPreview() {
       }
     }
   `);
-  console.log(allMdx);
+
   return (
     <div className={styles.postPreviews}>
       {allMdx.edges.map(({ node }) => (
-        <Link to={node.slug}>
+        <Link to={node.slug} key={node.slug}>
           <article
             className={styles.postPreviewContainer}
             key={node.fileAbsolutePath}
