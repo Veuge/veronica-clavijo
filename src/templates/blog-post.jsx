@@ -1,6 +1,7 @@
 import { graphql } from "gatsby";
 import { MDXRenderer } from "gatsby-plugin-mdx";
 import React from "react";
+import { Tag } from "../components/Tag";
 
 const BlogPost = (props) => {
   console.log({props, data: props.data, title: props.data.mdx})
@@ -9,7 +10,7 @@ const BlogPost = (props) => {
       <h1>{props.data.mdx.frontmatter.title}</h1>
       <h2>{props.data.mdx.frontmatter.date}</h2>
       {props.data.mdx.frontmatter.tags.map(tag => (
-        <h3 key={tag}>{tag}</h3>
+        <Tag key={tag} tag={tag} />
       ))}
       <MDXRenderer>{props.data.mdx.body}</MDXRenderer>
     </div>
@@ -24,7 +25,7 @@ export const query = graphql`
       slug
       body
       frontmatter {
-        date(locale: "es")
+        date(formatString: "d MMMM YYYY", locale: "es")
         title
         description
         tags
