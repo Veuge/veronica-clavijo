@@ -9,7 +9,7 @@ const BlogPost = (props) => {
     <div>
       <h1>{props.data.mdx.frontmatter.title}</h1>
       <h2>{props.data.mdx.frontmatter.date}</h2>
-      {props.data.mdx.frontmatter.tags.map(tag => (
+      {!!props.data.mdx.frontmatter.tags && props.data.mdx.frontmatter.tags.map(tag => (
         <Tag key={tag} tag={tag} />
       ))}
       <MDXRenderer>{props.data.mdx.body}</MDXRenderer>
