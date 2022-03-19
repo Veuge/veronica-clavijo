@@ -2,6 +2,12 @@ import { graphql } from "gatsby";
 import { MDXRenderer } from "gatsby-plugin-mdx";
 import React from "react";
 import { Tag } from "../components/Tag";
+import CodeBlock from "../components/Code";
+import { MDXProvider } from "@mdx-js/react";
+
+const components = {
+  pre: CodeBlock
+}
 
 const BlogPost = (props) => {
   console.log({props, data: props.data, title: props.data.mdx})
@@ -12,7 +18,9 @@ const BlogPost = (props) => {
       {!!props.data.mdx.frontmatter.tags && props.data.mdx.frontmatter.tags.map(tag => (
         <Tag key={tag} tag={tag} />
       ))}
-      <MDXRenderer>{props.data.mdx.body}</MDXRenderer>
+      <MDXProvider components={components}>
+        <MDXRenderer>{props.data.mdx.body}</MDXRenderer>
+      </MDXProvider>
     </div>
   );
 };

@@ -13,7 +13,7 @@ Al parecer es un bug de la aplicación en si o quizas algo con las aplicaciones 
 
 Me pasé un buen rato investigando y el item [Window Buttons](https://docs.xfce.org/xfce/xfce4-panel/4.12/tasklist) obtiene su configuracion mediante los archivos `.desktop` de los diferentes programas. Buscando este archivo de Slack da como resultado:
 
-```sh
+```bash
 $ sudo find / -iname "*slack*.desktop"
 
 # Output
@@ -23,7 +23,7 @@ $ sudo find / -iname "*slack*.desktop"
 
 El archivo en el directorio `$HOME/.config/autostart` es un symlink del de `/usr/share/applications`, entonces con arreglar este es suficiente. El contenido de este `.desktop` es:
 
-```sh
+```bash
 $ cat /usr/share/applications/slack.desktop
 
 # Output
@@ -42,7 +42,7 @@ MimeType=x-scheme-handler/slack;
 
 La linea interesante aqui es `Icon=/usr/share/pixmaps/slack.png`, el archivo de imagen especificado es totalmente válido, existe y tiene permisos correctos.
 
-```sh
+```bash
 $ ls -l /usr/share/pixmaps/slack.png 
 
 # Output
@@ -56,7 +56,7 @@ Como parece que todo anda bien en la configuración pareciera que es un bug en a
 
 Siguiendo estos pasos manualmente el proceso es:
 
-```sh
+```bash
 $ xwininfo -root -tree | sed -e 's/^ *//'| grep -E '0x.*Slack\s{1}\|' | awk '{print $1}'
 
 # Output
@@ -76,7 +76,7 @@ Para esto el repliqué el proceso descrito en [este comentario](https://www.redd
 
 Desglosando el script:
 
-```sh
+```bash
 # Permite sobreescribir el .desktop
 env BAMF_DESKTOP_FILE_HINT=$SLACK_DESKTOP
 
@@ -95,7 +95,7 @@ xseticon -id $app_wid $SLACK_ICON
 
 Y utilizando el script en el archivo `.desktop` en `Exec`.
 
-```sh
+```bash
 [Desktop Entry]
 Name=Slack
 StartupWMClass=Slack
@@ -114,3 +114,9 @@ MimeType=x-scheme-handler/slack;
 - Esta solución es solo un workaround para restaurar el icono de Slack y otras aplicaciones en XFCE, idealmente se deberia determinar exactamente la razon por la cual el icono no está disponible.
 - El workaround funciona bien cuando se inicia manualmente Slack y cuando está entre la aplicacion que se auto-inician al iniciar sesión.
 - Se puede mejorar el script para hacerlo mas configurable para que sea extensible a otras aplicaciones con este error en el ícono. (Lo haré en algun momento...)
+
+```js
+const x = () => {
+  console.log('This is a statement');
+}
+```
