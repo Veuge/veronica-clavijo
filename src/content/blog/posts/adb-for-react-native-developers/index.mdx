@@ -86,7 +86,7 @@ adb pull /sdcard/Downloads/voice.aac ~/Downloads/voice.aac
 
 Si tienes un instalador .apk válido que quisieras instalar en un dispositivo desde la línea de comandos:
 
-```shell
+```bash
 adb install <archivo-apk>
 ```
 
@@ -94,13 +94,13 @@ adb install <archivo-apk>
 
 Es útil también tomar una captura de pantalla del dispositivo en un determinado momento para documentar el estado de la aplicación. Se logra facilmente con la siguiente sintaxis del comando:
 
-```shell
+```bash
 adb shell screencap <nombre-de-archivo>
 ```
 
 Por ejemplo, el resultado de:
 
-```shell
+```bash
 adb shell screencap /sdcard/Pictures/captura-pantalla.png
 ```
 
@@ -110,7 +110,7 @@ es una imagen en `/sdcard/Pictures` con el nombre `captura-pantalla.png`.
 
 Así como se puede obtener una captura de pantalla, es también posible grabar un video de la pantalla.
 
-```shell
+```bash
 adb shell screenrecord <nombre-de-archivo>
 ```
 
@@ -118,7 +118,7 @@ Para parar la grabación basta con presionar la combinación de teclado `Ctrl + 
 
 Por ejemplo:
 
-```shell
+```bash
 adb shell screenrecord /sdcard/Video/record.mp4
 
 # 10 segundos después

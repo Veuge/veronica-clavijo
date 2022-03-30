@@ -21,9 +21,9 @@ Por lo tanto el modelo del controlador es `BCM43142`, siguiendo [estas instrucci
 Parecía que el GUI NetworkManager intentaba conectarse a la red WiFi, pero fallaba y abortaba el proceso. ¿Qué estaba pasando?
 
 Para averiguar la primera opción es consultar con dmesg
-```
+```bash
 $ sudo dmesg
-````
+```
 La salida resultó asi:
 ![Resultado de dmesg indicando que falló al cargar el firmware](./dmesg-output.png "Resultado de dmesg indicando que falló al cargar el firmware")
 
