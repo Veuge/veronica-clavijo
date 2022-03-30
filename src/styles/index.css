@@ -73,6 +73,7 @@ hr {
 pre {
   font-family: monospace, monospace; /* 1 */
   font-size: 1em; /* 2 */
+  overflow-x: scroll;
 }
 
 /* Text-level semantics
@@ -116,6 +117,7 @@ kbd,
 samp {
   font-family: monospace, monospace; /* 1 */
   font-size: 1em; /* 2 */
+  word-break: break-all;
 }
 
 /**

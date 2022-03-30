@@ -4,15 +4,15 @@ import React from "react";
 import { Tag } from "../components/Tag";
 import CodeBlock from "../components/Code";
 import { MDXProvider } from "@mdx-js/react";
+import * as styles from "../styles/code.module.scss";
 
 const components = {
   pre: CodeBlock
 }
 
 const BlogPost = (props) => {
-  console.log({props, data: props.data, title: props.data.mdx})
   return (
-    <div>
+    <div className={styles.postContainer}>
       <h1>{props.data.mdx.frontmatter.title}</h1>
       <h2>{props.data.mdx.frontmatter.date}</h2>
       {!!props.data.mdx.frontmatter.tags && props.data.mdx.frontmatter.tags.map(tag => (
