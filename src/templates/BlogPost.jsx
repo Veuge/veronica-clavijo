@@ -4,26 +4,29 @@ import React from "react";
 import { Tag } from "../components/Tag";
 import CodeBlock from "../components/Code";
 import { MDXProvider } from "@mdx-js/react";
-import * as styles from "../styles/code.module.scss";
+import * as styles from "../styles/blogpost.module.scss";
 
 const components = {
   pre: CodeBlock
 }
 
-const BlogPost = (props) => {
+const BlogPost = ({ data }) => {
+  const { mdx: { frontmatter, body } } = data;
   return (
-    <div className={styles.postContainer}>
-      <h1>{props.data.mdx.frontmatter.title}</h1>
-      <div className={styles.metaInfoContainer}>
-        <span>{props.data.mdx.frontmatter.date}</span>
-        {!!props.data.mdx.frontmatter.tags && props.data.mdx.frontmatter.tags.map(tag => (
-          <Tag key={tag} tag={tag} />
-        ))}
+    <article className={styles.blogPostContainer}>
+      <div className={styles.post}>
+        <h1 className={styles.postTitle}>{frontmatter.title}</h1>
+        <div className={styles.metaInfoContainer}>
+          <span>{frontmatter.date}</span>
+          {!!frontmatter.tags && frontmatter.tags.map(tag => (
+            <Tag key={tag} tag={tag} />
+          ))}
+        </div>
+        <MDXProvider components={components}>
+          <MDXRenderer>{body}</MDXRenderer>
+        </MDXProvider>
       </div>
-      <MDXProvider components={components}>
-        <MDXRenderer>{props.data.mdx.body}</MDXRenderer>
-      </MDXProvider>
-    </div>
+    </article>
   );
 };
 
