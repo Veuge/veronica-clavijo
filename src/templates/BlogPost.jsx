@@ -14,10 +14,12 @@ const BlogPost = (props) => {
   return (
     <div className={styles.postContainer}>
       <h1>{props.data.mdx.frontmatter.title}</h1>
-      <h2>{props.data.mdx.frontmatter.date}</h2>
-      {!!props.data.mdx.frontmatter.tags && props.data.mdx.frontmatter.tags.map(tag => (
-        <Tag key={tag} tag={tag} />
-      ))}
+      <div className={styles.metaInfoContainer}>
+        <span>{props.data.mdx.frontmatter.date}</span>
+        {!!props.data.mdx.frontmatter.tags && props.data.mdx.frontmatter.tags.map(tag => (
+          <Tag key={tag} tag={tag} />
+        ))}
+      </div>
       <MDXProvider components={components}>
         <MDXRenderer>{props.data.mdx.body}</MDXRenderer>
       </MDXProvider>
