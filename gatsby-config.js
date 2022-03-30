@@ -26,6 +26,7 @@ module.exports = {
       }
     },
     `gatsby-plugin-image`,
+    `gatsby-remark-images`,
     `gatsby-plugin-sharp`,
     `gatsby-transformer-sharp`, // Needed for dynamic images
     `gatsby-plugin-fontawesome-css`,
@@ -34,6 +35,14 @@ module.exports = {
       resolve: `gatsby-plugin-mdx`,
       options: {
         extensions: [`.md`, `.mdx`],
+        gatsbyRemarkPlugins: [
+          {
+            resolve: `gatsby-remark-images`,
+            options: {
+              maxWidth: 1200,
+            },
+          },
+        ],
       }
     }
   ],
