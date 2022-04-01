@@ -10,14 +10,14 @@ export default function Navbar() {
       <div className={styles.nav}>
         <Link
           className={composeClasses(styles.navLink, styles.navLinkGreen)}
-          to="/"
+          to="/posts"
           activeClassName={styles.activeNavLink}
         >
           Anotaciones
         </Link>
         <Link
           className={composeClasses(styles.navLink, styles.navLinkRed)}
-          to="/proyectos"
+          to="/projects"
           activeClassName={styles.activeNavLink}
         >
           Proyectos
