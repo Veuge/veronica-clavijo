@@ -1,11 +1,12 @@
 import { graphql } from "gatsby";
 import { MDXRenderer } from "gatsby-plugin-mdx";
 import React from "react";
-import { Tag } from "../components/Tag";
-import CodeBlock from "../components/Code";
 import { MDXProvider } from "@mdx-js/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsisV } from "@fortawesome/free-solid-svg-icons";
+
+import Tag from "../components/tag/Tag";
+import CodeBlock from "../components/Code";
 
 import * as styles from "../styles/blogpost.module.scss";
 

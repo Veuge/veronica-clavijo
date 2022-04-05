@@ -3,8 +3,8 @@ import { graphql, useStaticQuery, Link } from "gatsby";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsisV } from "@fortawesome/free-solid-svg-icons";
 
-import { Tag } from "./Tag";
-import * as styles from "../styles/postpreviews.module.scss";
+import Tag from "../tag/Tag";
+import * as styles from "./postpreviews.module.scss";
 
 export default function PostPreview() {
   const { allMdx } = useStaticQuery(graphql`
