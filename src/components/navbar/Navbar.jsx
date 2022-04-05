@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "gatsby";
 
-import { composeClasses } from "../helpers";
-import * as styles from "../styles/navbar.module.scss";
+import { composeClasses } from "../../helpers/index";
+import * as styles from "./navbar.module.scss";
 
 export default function Navbar() {
   return (
