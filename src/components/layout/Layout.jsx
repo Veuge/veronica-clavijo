@@ -1,6 +1,6 @@
 import React from "react";
-import Navbar from "../Navbar";
-import Info from "../Info";
+import Navbar from "../navbar/Navbar";
+import Info from "../info/Info";
 import * as classnames from "./layout.module.scss";
 
 const Layout = (props) => {
