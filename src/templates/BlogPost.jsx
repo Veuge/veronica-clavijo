@@ -22,7 +22,7 @@ const BlogPost = ({ data }) => {
         <h1 className={styles.postTitle}>{frontmatter.title}</h1>
         <div className={styles.metaInfoContainer}>
           <span>{frontmatter.date}</span>
-          {!!frontmatter.tags.length && (
+          {!!frontmatter.tags && (
             <>
               <FontAwesomeIcon
                 icon={faEllipsisV}

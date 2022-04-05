@@ -71,11 +71,20 @@
         list-style-type: square;
       }
     }
+    pre {
+      border-radius: 8px;
+      border: .6px solid var(--mainGreen);
+      margin-block: 1rem;
+      box-shadow: 0px 0px 0px 8px rgba(0,0,0,0.2);
+      span {
+        line-height: 1.5em;
+      }
+    }
   }
 }
 
 .prism-code {
-  overflow-x: scroll;
+  border: 1px solid var(--mainGreen);
 }
 
 @media (min-width: 767px) {
