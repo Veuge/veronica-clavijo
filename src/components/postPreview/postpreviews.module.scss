@@ -1,3 +1,5 @@
+@import "../../styles//mixins.scss";
+
 .postPreviews {
 
   .postPreviewContainer {
@@ -7,7 +9,7 @@
   
     h1 {
       font-size: 28px;
-      text-shadow: 0.1rem 0.1rem 0.1rem var(--plainBlack);
+      @include shadowedText;
     }
 
     h3 {
@@ -17,7 +19,7 @@
     }
 
     span {
-      color: var(--white);
+      color: var(--lightGray);
       font-size: 12px;
     }
 
