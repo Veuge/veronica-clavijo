@@ -1,0 +1,20 @@
+@import "../../styles/mixins.scss";
+
+.header {
+  display: flex;
+  justify-content: center;
+  margin-block-end: 10px;
+  h1 {
+    @include shadowedText;
+    font-size: 1.4rem;
+    line-height: 0.2rem;
+  }
+  h4 {
+    font-size: 0.9em;
+    span {
+      font-size: 0.9rem;
+      font-weight: bold;
+      color: var(--mainGreen)
+    }
+  }
+}
