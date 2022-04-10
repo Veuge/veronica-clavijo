@@ -1,6 +1,7 @@
 @import "../../styles//mixins.scss";
 
 .postPreviews {
+  max-inline-size: 60ch;
 
   .postPreviewContainer {
     padding: 8px 15px;

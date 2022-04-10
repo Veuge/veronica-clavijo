@@ -1,23 +1,36 @@
-import React from "react";
+import React, { Fragment } from "react";
+import PropTypes from "prop-types";
+
 import Navbar from "../navbar/Navbar";
 import Info from "../info/Info";
+import { HOME, sectionNameColors } from "../../helpers";
 import * as classnames from "./layout.module.scss";
 
-const Layout = (props) => {
+const Layout = ({ section, children }) => {
   return (
-    <main className={classnames.main}>
-      <header>
-        <Navbar />
-      </header>
-      <section>
-        <Info />
-      </section>
-      <article>
-        {props.children}
-      </article>
-      <footer></footer>
-    </main>
+    <Fragment>
+      <title>Verónica Clavijo | {sectionNameColors[section].title}</title>
+      <main className={classnames.main}>
+        <header>
+          <Navbar />
+        </header>
+        <div className={classnames.body}>
+          <article>
+            {children}
+          </article>
+          {section !== HOME && (
+            <footer>
+              <Info />
+            </footer>
+          )}
+        </div>
+      </main>
+    </Fragment>
   );
+}
+
+Layout.propTypes = {
+  section: PropTypes.oneOf(["home", "posts", "projects", "whoAmI"]).isRequired
 }
 
 export default Layout;
