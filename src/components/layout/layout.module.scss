@@ -1,0 +1,26 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  padding-inline: 12px;
+
+  header {
+    padding-block-start: 8px;
+    z-index: 10;
+    position: sticky;
+    width: 100%;
+    top: 0;
+    /* From https://css.glass */
+    background: rgba(42, 43, 46, 0.28);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(6.6px);
+    -webkit-backdrop-filter: blur(6.6px);
+  }
+}
+
+@media (min-width: 767px) {
+  .body {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-around;
+  }
+}

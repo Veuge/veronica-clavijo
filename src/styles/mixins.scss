@@ -1,0 +1,5 @@
+@mixin shadowedText {
+  background-size: 4px 50px;
+  text-shadow: 0.1rem 0.1rem 0.1rem var(--plainBlack);
+  color: var(--white);
+}

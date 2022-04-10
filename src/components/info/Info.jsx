@@ -9,7 +9,7 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 
-import * as styles from "../styles/info.module.scss";
+import * as styles from "./info.module.scss";
 
 export default function Info() {
   const { file, site } = useStaticQuery(graphql`
