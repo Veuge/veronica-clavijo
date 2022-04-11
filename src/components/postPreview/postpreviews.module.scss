@@ -1,7 +1,7 @@
 @import "../../styles//mixins.scss";
 
 .postPreviews {
-  max-inline-size: 60ch;
+  max-inline-size: 70ch;
 
   .postPreviewContainer {
     padding: 8px 15px;
@@ -35,5 +35,11 @@
       margin: 0 8px;
       text-shadow: 0.1rem 0.1rem 0.1rem var(--plainBlack);
     }
+  }
+}
+
+@media (min-width: 767px) {
+  .postPreviews {
+    margin: auto;
   }
 }

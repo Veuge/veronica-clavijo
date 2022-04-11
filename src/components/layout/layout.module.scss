@@ -22,5 +22,13 @@
     display: flex;
     flex-direction: row-reverse;
     justify-content: space-around;
+
+    article {
+      flex: 4;
+    }
+
+    footer: {
+      flex: 1;
+    }
   }
 }
