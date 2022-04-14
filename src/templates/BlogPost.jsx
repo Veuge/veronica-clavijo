@@ -8,6 +8,7 @@ import { faEllipsisV } from "@fortawesome/free-solid-svg-icons";
 import Layout from "../components/layout/Layout";
 import Tag from "../components/tag/Tag";
 import CodeBlock from "../components/Code";
+import { POSTS } from "../helpers";
 
 import * as styles from "../styles/blogpost.module.scss";
 
@@ -18,7 +19,7 @@ const components = {
 const BlogPost = ({ data }) => {
   const { mdx: { frontmatter, body } } = data;
   return (
-    <Layout>
+    <Layout section={POSTS}>
       <article className={styles.blogPostContainer}>
         <div className={styles.post}>
           <h1 className={styles.postTitle}>{frontmatter.title}</h1>
