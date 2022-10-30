@@ -6,7 +6,7 @@ import Info from "../info/Info";
 import { HOME, sectionNameColors } from "../../helpers";
 import * as classnames from "./layout.module.scss";
 
-const Layout = ({ section, children }) => {
+const Layout = ({ section, children, style }) => {
   return (
     <Fragment>
       <title>Verónica Clavijo | {sectionNameColors[section].title}</title>
@@ -14,7 +14,7 @@ const Layout = ({ section, children }) => {
         <header>
           <Navbar />
         </header>
-        <div className={classnames.body}>
+        <div className={classnames.body} style={style || {}}>
           <article>
             {children}
           </article>
