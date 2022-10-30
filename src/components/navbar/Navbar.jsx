@@ -18,13 +18,13 @@ export default function Navbar() {
         >
           Anotaciones
         </Link>
-        <Link
+        {/* <Link
           className={composeClasses(styles.navLink, styles.navLinkRed)}
           to="/projects"
           activeClassName={styles.activeNavLink}
         >
           Proyectos
-        </Link>
+        </Link> */}
         <Link
           className={composeClasses(styles.navLink, styles.navLinkBlue)}
           to="/whoami"
