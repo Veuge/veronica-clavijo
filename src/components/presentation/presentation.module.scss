@@ -1,0 +1,66 @@
+@use "../../styles/variables.scss";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+
+  .profilePicContainer {
+    margin-bottom: 25px;
+  }
+
+  .content {
+    max-width: 85%;
+    line-height: 1.8;
+
+    p {
+      font-size: 1.01rem;
+      text-align: justify;
+      span {
+        color: var(--purple);
+        font-weight: 800;
+      }
+    }
+
+    a {
+      color: var(--blue);
+      opacity: 0.8;
+      font-weight: bold;
+      text-decoration: underline;
+      -webkit-text-decoration-color: var(--blue);
+      text-decoration-color: var(--blue);
+    }
+  }
+
+  .links {
+    display: flex;
+    justify-content: space-around;
+    margin-block: 20px;
+    a {
+      color: var(--blue);
+      text-decoration: underline;
+      -webkit-text-decoration-color: var(--blue);
+      text-decoration-color: var(--blue);
+      svg {
+        font-size: 23px;
+      }
+    }
+    
+  }
+}
+
+@media (min-width: variables.$tablet) {
+  .container {
+    flex-direction: row;
+
+    .profilePicContainer {
+      margin-right: 25px;
+    }
+  
+    .content {
+      max-width: 60%;
+    }
+  }
+}

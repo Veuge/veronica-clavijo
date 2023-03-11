@@ -49,7 +49,7 @@ export default function Info() {
         loading="lazy"
         className={styles.avatar}
       />
-      <div className={styles.info}>
+      <div>
         <h1>{site.siteMetadata.author}</h1>
         <h4>{site.siteMetadata.description}</h4>
         <div className={styles.contactContainer}>
