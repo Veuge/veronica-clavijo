@@ -39,29 +39,4 @@ const IndexPage = () => {
   )
 };
 
-export const query = graphql`
-  query InfoQuery {
-    file(relativePath: {eq: "profile.jpeg"}) {
-      childImageSharp {
-        gatsbyImageData(
-          layout: CONSTRAINED
-          placeholder: DOMINANT_COLOR
-          formats: [AUTO, WEBP]
-          width: 150
-          height: 150
-        )
-      }
-    }
-    site {
-      siteMetadata {
-        links {
-          email
-          github
-          linkedin
-          twitter
-        }
-      }
-    }
-  }`;
-
 export default IndexPage
