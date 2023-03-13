@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import Navbar from "../navbar/Navbar";
 import Info from "../info/Info";
-import { HOME, sectionNameColors } from "../../helpers";
+import { HOME, sectionNameColors, WHOAMI } from "../../helpers";
 import * as classnames from "./layout.module.scss";
 
 const Layout = ({ section, children, style }) => {
@@ -18,7 +18,7 @@ const Layout = ({ section, children, style }) => {
           <article>
             {children}
           </article>
-          {section !== HOME && (
+          {![HOME, WHOAMI].includes(section) && (
             <footer>
               <Info />
             </footer>
