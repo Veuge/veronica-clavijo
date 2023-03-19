@@ -11,9 +11,21 @@
     margin-bottom: 25px;
   }
 
+  .avatar {
+    border-radius: 50%;
+    box-shadow: 1rem 1rem 1rem var(--plainBlack);
+  }
+
+  .profile {
+    border-radius: 10%;
+    box-shadow: 1rem 1rem 1rem var(--plainBlack);
+    margin-bottom: 25px;
+  }
+
   .content {
     max-width: 85%;
     line-height: 1.8;
+    margin-bottom: 30px;
 
     p {
       font-size: 1.01rem;
@@ -32,6 +44,69 @@
       -webkit-text-decoration-color: var(--blue);
       text-decoration-color: var(--blue);
     }
+
+    dt, dd {
+      color: white;
+    }
+
+    dt {
+      font-weight: bold;
+      text-align: right;
+      clear: left;
+      float: left;
+    }
+
+    dd {
+      padding: .5em 0;
+    }
+
+    dl {
+      width: 100%;
+      &:after {
+        content: "";
+        display: table;
+        clear: both;
+      }
+    }
+
+    dt, dd {
+      display: inline-block;
+      width: 30%;
+    }
+
+    dd {
+      width: 70%;
+      padding-left: 1em;
+      clear: right;
+    }
+
+    dd + dd {
+      float: right;
+      clear: both;
+    }
+
+    dt:first-child {
+      padding-top: .5em;
+    }
+
+    dd + dt {
+      clear: both;
+      padding-top:.5em;
+    }
+
+    dt + dt {
+      width: 100%;
+      float: none;
+      padding: 0 70% 0 0;
+    }
+
+    dt + dt + dd {
+      margin-top: -2em;
+    }
+
+    dt + dt + dd + dt {
+      margin-top: 2em;
+    }
   }
 
   .links {
@@ -46,8 +121,7 @@
       svg {
         font-size: 23px;
       }
-    }
-    
+    }   
   }
 }
 

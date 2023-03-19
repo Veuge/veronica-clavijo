@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useMemo } from 'react';
+import { graphql, useStaticQuery } from "gatsby";
 import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTwitter, faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
@@ -6,8 +7,35 @@ import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 
 import * as classNames from './presentation.module.scss';
 
-const Presentation = ({ file, links }) => {
-  console.log({ links });
+const Presentation = () => {
+  const { file, site } = useStaticQuery(graphql`
+    query PresentationQuery {
+      file(relativePath: {eq: "profile2.jpg"}) {
+        childImageSharp {
+          gatsbyImageData(
+            layout: CONSTRAINED
+            placeholder: DOMINANT_COLOR
+            formats: [AUTO, WEBP]
+            width: 150
+            height: 150
+          )
+        }
+      }
+      site {
+        siteMetadata {
+          links {
+            email
+            github
+            linkedin
+            twitter
+          }
+        }
+      }
+    }
+  `);
+
+  const links = useMemo(() => site.siteMetadata.links, [site]);
+
   return (
     <div className={classNames.container}>
       <div className={classNames.profilePicContainer}>
@@ -15,6 +43,7 @@ const Presentation = ({ file, links }) => {
           image={getImage(file)}
           alt={'hey'}
           loading="lazy"
+          className={classNames.avatar}
           style={{ borderRadius: '50%' }}
         />
       </div>
