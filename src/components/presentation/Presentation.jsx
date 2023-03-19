@@ -43,6 +43,7 @@ const Presentation = () => {
           image={getImage(file)}
           alt={'hey'}
           loading="lazy"
+          className={classNames.avatar}
           style={{ borderRadius: '50%' }}
         />
       </div>
