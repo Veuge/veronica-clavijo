@@ -16,6 +16,7 @@ Como en el trabajo paso la mayor parte del tiempo desarrollando una app en React
 |      2       |               |
  ------------------------------
 ```
+
 El panel 1 se mantiene estático corriendo el metro-bundler de la app.
 
 El panel 2 lo utilizo para ejecutar `npx react-native run-{platform}` y para comandos git.
@@ -27,7 +28,9 @@ Normalmente iniciaba tmux y manualmente construía los paneles e iniciaba las mi
 Investigando un poco descubrí que puedo lograr la disposición de los paneles y las tareas de cada uno con un simple comando al momento de iniciar la sesión TMUX. Entonces esas son mis dos metas, lograr la estructura del layout e iniciar las tareas en cada panel.
 
 ## Paneles en proceso...
+
 Para lograr el layout de **manera manual** siempre sigo los siguientes pasos:
+
 ```bash
 $ tmux          # Inicia sesión TMUX
 C-b %           # Divide la pantalla en 2 verticalmente
@@ -48,6 +51,7 @@ split-window -h
 |              |               |
  ------------------------------
 ```
+
 El argumento `-h` indica que la ventana se dividirá en dos paneles de manera horizontal, el siguiente paso es dividir el Panel 1 en dos paneles verticalmente, por lo que complementando el comando es:
 
 ```bash
@@ -64,6 +68,7 @@ split-window -v \;
 ```
 
 El resultado obtenido hasta el momento no es exactamente lo que busco, pero hay que tomar en cuenta la manera como TMUX funciona, una vez que se divide la pantalla en paneles TMUX escoge el panel activo:
+
 - cuando se divide horizontalmente el panel activo es el de la derecha
 - cuando se divide verticalmente el panel activo es el de abajo.
 
@@ -86,7 +91,9 @@ split-window -v \;
 🎉🎉🎉 Listo!, el layout es como quiero...
 
 ## Inicio de tareas en cada panel
+
 Ya que el layout está listo ahora queda iniciar las tareas en cada panel.
+
 - Panel 1 para iniciar el metro bundler
 - Panel 2 para ejecutar `npx react-native run-{platform}`
 - Panel 3 para ejecutar el emulador
@@ -106,6 +113,7 @@ send-keys 'npx react-native run-android' C-m \;
 🎉🎉🎉 Listo! añadiendo `send-keys` cuando se crea cada panel se inicia la tarea de cada uno. Ahora cada vez que quiero iniciar TMUX para trabajar en la app de react-native solo tengo que copiar y pegar ese ultimo comando en una terminal que este en el directorio raiz del proyecto.
 
 ## Mejoras
+
 Hay un par de detalles que se pueden mejorar, la primera es que tengo que cambiar de directorio a la raiz del proyecto antes de copiar y pegar el comando de TMUX, eso se puede mejorar!. El comando `new-session` tiene disponible la bandera `-c` con la que se puede especificar el directorio en el cual se inicia la sesión de TMUX, aplicando esto tenemos:
 
 ```bash
@@ -131,12 +139,15 @@ select-pane -t 1 \; \
 split-window -v \; \
 send-keys 'npx react-native run-android' C-m \;
 ```
+
 ---
+
 **MISIÓN CUMPLIDA**
 
-Este [gist](https://gist.github.com/Veuge/4d460396bc459bf23093318f34a8186f) tiene el resultado final 
+Este [gist](https://gist.github.com/Veuge/4d460396bc459bf23093318f34a8186f) tiene el resultado final
 
 ## Referencias
+
 - [TMUX Wiki](https://github.com/tmux/tmux/wiki/Getting-Started)
 - [TMUX Man Page](https://man7.org/linux/man-pages/man1/tmux.1.html)
 - [Este hilo de StackOverflow](https://stackoverflow.com/questions/5609192/how-to-set-up-tmux-so-that-it-starts-up-with-specified-windows-opened)

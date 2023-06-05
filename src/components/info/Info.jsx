@@ -2,11 +2,7 @@ import React from "react";
 import { graphql, useStaticQuery } from "gatsby";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faTwitter,
-  faGithub,
-  faLinkedin,
-} from "@fortawesome/free-brands-svg-icons";
+import { faTwitter, faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 
 import * as styles from "./info.module.scss";
@@ -14,7 +10,7 @@ import * as styles from "./info.module.scss";
 export default function Info() {
   const { file, site } = useStaticQuery(graphql`
     query MainQuery {
-      file(relativePath: {eq: "profile.jpeg"}) {
+      file(relativePath: { eq: "profile.jpeg" }) {
         childImageSharp {
           gatsbyImageData(
             layout: CONSTRAINED
@@ -53,16 +49,32 @@ export default function Info() {
         <h1>{site.siteMetadata.author}</h1>
         <h4>{site.siteMetadata.description}</h4>
         <div className={styles.contactContainer}>
-          <a target="_blank" href={site.siteMetadata.links.twitter} rel="noreferrer">
+          <a
+            target="_blank"
+            href={site.siteMetadata.links.twitter}
+            rel="noreferrer"
+          >
             <FontAwesomeIcon icon={faTwitter} />
           </a>
-          <a target="_blank" href={site.siteMetadata.links.github} rel="noreferrer">
+          <a
+            target="_blank"
+            href={site.siteMetadata.links.github}
+            rel="noreferrer"
+          >
             <FontAwesomeIcon icon={faGithub} />
           </a>
-          <a target="_blank" href={site.siteMetadata.links.linkedin} rel="noreferrer">
+          <a
+            target="_blank"
+            href={site.siteMetadata.links.linkedin}
+            rel="noreferrer"
+          >
             <FontAwesomeIcon icon={faLinkedin} />
           </a>
-          <a target="_blank" href={`mailto:${site.siteMetadata.links.email}`} rel="noreferrer">
+          <a
+            target="_blank"
+            href={`mailto:${site.siteMetadata.links.email}`}
+            rel="noreferrer"
+          >
             <FontAwesomeIcon icon={faEnvelope} />
           </a>
         </div>

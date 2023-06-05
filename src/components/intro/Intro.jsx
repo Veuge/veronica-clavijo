@@ -15,7 +15,10 @@ const Intro = ({ file, links }) => {
       <div className={styles.description}>
         <p>
           Hola! soy Verónica Clavijo y este es mi{" "}
-          <a href="https://maggieappleton.com/garden-history" target="__blank">
+          <a
+            href="https://maggieappleton.com/garden-history"
+            target="__blank"
+          >
             jardín digital
           </a>{" "}
           lo que quiere decir que en este blog nada es definitivo, todo está sujeto a cambio, o sea
@@ -27,15 +30,26 @@ const Intro = ({ file, links }) => {
         </p>
         <p>
           Si quieres charlar mandame un{" "}
-          <a className={styles.redc} href={`mailto:${links.email}`}>
+          <a
+            className={styles.redc}
+            href={`mailto:${links.email}`}
+          >
             email
           </a>
           , escribeme un{" "}
-          <a className={styles.greenc} href={links.twitter} target="__blank">
+          <a
+            className={styles.greenc}
+            href={links.twitter}
+            target="__blank"
+          >
             tweet
           </a>{" "}
           o un{" "}
-          <a className={styles.bluec} href={links.linkedin} target="__blank">
+          <a
+            className={styles.bluec}
+            href={links.linkedin}
+            target="__blank"
+          >
             mensaje directo
           </a>
         </p>

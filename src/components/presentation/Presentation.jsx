@@ -1,16 +1,16 @@
-import React, { useMemo } from 'react';
+import React, { useMemo } from "react";
 import { graphql, useStaticQuery } from "gatsby";
-import { GatsbyImage, getImage } from 'gatsby-plugin-image';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTwitter, faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
-import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { GatsbyImage, getImage } from "gatsby-plugin-image";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTwitter, faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons";
+import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 
-import * as classNames from './presentation.module.scss';
+import * as classNames from "./presentation.module.scss";
 
 const Presentation = () => {
   const { file, site } = useStaticQuery(graphql`
     query PresentationQuery {
-      file(relativePath: {eq: "profile2.jpg"}) {
+      file(relativePath: { eq: "profile2.jpg" }) {
         childImageSharp {
           gatsbyImageData(
             layout: CONSTRAINED
@@ -41,10 +41,10 @@ const Presentation = () => {
       <div className={classNames.profilePicContainer}>
         <GatsbyImage
           image={getImage(file)}
-          alt={'hey'}
+          alt={"hey"}
           loading="lazy"
           className={classNames.avatar}
-          style={{ borderRadius: '50%' }}
+          style={{ borderRadius: "50%" }}
         />
       </div>
       <div className={classNames.content}>
@@ -55,8 +55,12 @@ const Presentation = () => {
         </p>
         <br />
         <p>
-          Bienvenido a mi{' '}
-          <a href="https://maggieappleton.com/garden-history" target="_blank" rel="noreferrer">
+          Bienvenido a mi{" "}
+          <a
+            href="https://maggieappleton.com/garden-history"
+            target="_blank"
+            rel="noreferrer"
+          >
             <b>jardin digital</b>
           </a>
           , aqui trataré de escribir mis aprendizajes del día a día, proyectos personales y
@@ -68,16 +72,32 @@ const Presentation = () => {
           <b>Si quieres charlar puedes encontrarme en:</b>
         </p>
         <div className={classNames.links}>
-          <a target="_blank" href={links.twitter} rel="noreferrer">
+          <a
+            target="_blank"
+            href={links.twitter}
+            rel="noreferrer"
+          >
             <FontAwesomeIcon icon={faTwitter} />
           </a>
-          <a target="_blank" href={links.github} rel="noreferrer">
+          <a
+            target="_blank"
+            href={links.github}
+            rel="noreferrer"
+          >
             <FontAwesomeIcon icon={faGithub} />
           </a>
-          <a target="_blank" href={links.linkedin} rel="noreferrer">
+          <a
+            target="_blank"
+            href={links.linkedin}
+            rel="noreferrer"
+          >
             <FontAwesomeIcon icon={faLinkedin} />
           </a>
-          <a target="_blank" href={`mailto:${links.email}`} rel="noreferrer">
+          <a
+            target="_blank"
+            href={`mailto:${links.email}`}
+            rel="noreferrer"
+          >
             <FontAwesomeIcon icon={faEnvelope} />
           </a>
         </div>

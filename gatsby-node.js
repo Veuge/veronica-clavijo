@@ -10,16 +10,16 @@ exports.createPages = async ({ graphql, actions }) => {
           }
         }
       }
-    }  
+    }
   `);
 
-  data.allMdx.edges.forEach(edge => {
+  data.allMdx.edges.forEach((edge) => {
     actions.createPage({
       path: `posts/${edge.node.slug}`,
       component: templatePath.resolve("./src/templates/BlogPost.jsx"),
       context: {
-        slug: edge.node.slug
-      }
+        slug: edge.node.slug,
+      },
     });
-  })
+  });
 };

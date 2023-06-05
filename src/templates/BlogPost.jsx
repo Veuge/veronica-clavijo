@@ -9,15 +9,16 @@ import Layout from "../components/layout/Layout";
 import Tag from "../components/tag/Tag";
 import CodeBlock from "../components/Code";
 import { POSTS } from "../helpers";
-
 import * as styles from "../styles/blogpost.module.scss";
 
 const components = {
-  pre: CodeBlock
-}
+  pre: CodeBlock,
+};
 
 const BlogPost = ({ data }) => {
-  const { mdx: { frontmatter, body } } = data;
+  const {
+    mdx: { frontmatter, body },
+  } = data;
   return (
     <Layout section={POSTS}>
       <article className={styles.blogPostContainer}>
@@ -31,8 +32,11 @@ const BlogPost = ({ data }) => {
                   icon={faEllipsisV}
                   className={styles.separatorIcon}
                 />
-                {frontmatter.tags.map(tag => (
-                  <Tag key={tag} tag={tag} />
+                {frontmatter.tags.map((tag) => (
+                  <Tag
+                    key={tag}
+                    tag={tag}
+                  />
                 ))}
               </>
             )}
@@ -50,7 +54,7 @@ export default BlogPost;
 
 export const query = graphql`
   query PostBySlug($slug: String) {
-    mdx(slug: {eq: $slug}) {
+    mdx(slug: { eq: $slug }) {
       slug
       body
       frontmatter {
@@ -61,4 +65,4 @@ export const query = graphql`
       }
     }
   }
-`
+`;
