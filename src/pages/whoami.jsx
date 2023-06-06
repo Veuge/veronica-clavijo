@@ -9,6 +9,6 @@ const WhoAmIPage = () => {
       <PresentationExtended />
     </Layout>
   );
-}
+};
 
 export default WhoAmIPage;

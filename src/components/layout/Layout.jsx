@@ -14,10 +14,11 @@ const Layout = ({ section, children, style }) => {
         <header>
           <Navbar />
         </header>
-        <div className={classnames.body} style={style || {}}>
-          <article>
-            {children}
-          </article>
+        <div
+          className={classnames.body}
+          style={style || {}}
+        >
+          <article>{children}</article>
           {![HOME, WHOAMI].includes(section) && (
             <footer>
               <Info />
@@ -27,10 +28,10 @@ const Layout = ({ section, children, style }) => {
       </main>
     </Fragment>
   );
-}
+};
 
 Layout.propTypes = {
-  section: PropTypes.oneOf(["home", "posts", "projects", "whoAmI"]).isRequired
-}
+  section: PropTypes.oneOf(["home", "posts", "projects", "whoAmI"]).isRequired,
+};
 
 export default Layout;

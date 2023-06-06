@@ -7,7 +7,7 @@
     padding: 8px 15px;
     border: 1px solid var(--otherGray);
     margin-bottom: 10px;
-  
+
     h1 {
       font-size: 28px;
       @include shadowedText;
@@ -29,7 +29,7 @@
       align-items: center;
       padding: 8px 0;
     }
-  
+
     .separatorIcon {
       color: var(--mainGreen);
       margin: 0 8px;

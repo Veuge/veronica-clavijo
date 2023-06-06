@@ -29,7 +29,10 @@ export default function PostPreview() {
   return (
     <div className={styles.postPreviews}>
       {allMdx.edges.map(({ node }) => (
-        <Link to={node.slug} key={node.slug}>
+        <Link
+          to={node.slug}
+          key={node.slug}
+        >
           <article
             className={styles.postPreviewContainer}
             key={node.fileAbsolutePath}
@@ -44,7 +47,12 @@ export default function PostPreview() {
                     icon={faEllipsisV}
                     className={styles.separatorIcon}
                   />
-                  {node.frontmatter.tags.map((tag) => <Tag key={tag} tag={tag} />)}
+                  {node.frontmatter.tags.map((tag) => (
+                    <Tag
+                      key={tag}
+                      tag={tag}
+                    />
+                  ))}
                 </>
               )}
             </div>

@@ -1,0 +1,73 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "ignorePatterns": ["gatsby-config.js", "gatsby-node.js"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:jsx-a11y/recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "plugin:import/react",
+    "plugin:react-hooks/recommended"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 2021,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "plugins": ["react", "import", "jsx-a11y", "react-hooks"],
+  "rules": {
+    "react/prop-types": "off",
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-uses-react": "off",
+    "react/jsx-uses-vars": "warn",
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+    "import/order": [
+      "error",
+      {
+        "groups": [["builtin", "external"], "internal", ["parent", "sibling", "index"]],
+        "newlines-between": "always"
+      }
+    ],
+    "import/no-unresolved": "off",
+    "import/named": "off",
+    "import/namespace": "off",
+    "import/default": "off",
+    "import/export": "off",
+    "jsx-a11y/anchor-is-valid": [
+      "error",
+      {
+        "components": ["Link"],
+        "specialLink": ["to"],
+        "aspects": ["noHref", "invalidHref", "preferButton"]
+      }
+    ],
+    "jsx-a11y/label-has-for": [
+      "error",
+      {
+        "required": {
+          "every": ["nesting", "id"]
+        }
+      }
+    ],
+    "jsx-a11y/label-has-associated-control": [
+      "error",
+      {
+        "required": {
+          "every": ["nesting", "id"]
+        }
+      }
+    ]
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  }
+}

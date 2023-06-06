@@ -8,7 +8,7 @@ const PostsPage = () => {
     <Layout section={POSTS}>
       <PostsPreviews />
     </Layout>
-  )
-}
+  );
+};
 
 export default PostsPage;

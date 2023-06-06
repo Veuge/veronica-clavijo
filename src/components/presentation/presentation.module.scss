@@ -45,7 +45,8 @@
       text-decoration-color: var(--blue);
     }
 
-    dt, dd {
+    dt,
+    dd {
       color: white;
     }
 
@@ -57,7 +58,7 @@
     }
 
     dd {
-      padding: .5em 0;
+      padding: 0.5em 0;
     }
 
     dl {
@@ -69,7 +70,8 @@
       }
     }
 
-    dt, dd {
+    dt,
+    dd {
       display: inline-block;
       width: 30%;
     }
@@ -86,12 +88,12 @@
     }
 
     dt:first-child {
-      padding-top: .5em;
+      padding-top: 0.5em;
     }
 
     dd + dt {
       clear: both;
-      padding-top:.5em;
+      padding-top: 0.5em;
     }
 
     dt + dt {
@@ -121,7 +123,7 @@
       svg {
         font-size: 23px;
       }
-    }   
+    }
   }
 }
 
@@ -132,7 +134,7 @@
     .profilePicContainer {
       margin-right: 25px;
     }
-  
+
     .content {
       max-width: 60%;
     }

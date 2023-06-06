@@ -9,7 +9,7 @@ const IndexPage = () => {
     <Layout section={HOME}>
       <Presentation />
     </Layout>
-  )
+  );
 };
 
-export default IndexPage
+export default IndexPage;

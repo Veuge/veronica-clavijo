@@ -16,7 +16,11 @@
 }
 
 /* reset */
-body,p,a,ul,li {
+body,
+p,
+a,
+ul,
+li {
   margin: 0;
   padding: 0;
   text-decoration: none;
@@ -32,29 +36,32 @@ body {
   overflow-x: hidden;
 }
 
-h1,h2,h3,h4,h5,h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   color: var(--white);
 }
 
-p, a, li {
+p,
+a,
+li {
   color: var(--white);
 }
 
 /* fonts */
 /* mobile */
 
-
 /* small tablet */
 @media screen and (min-width: 620px) {
-  
 }
 
 /* large tablets and laptops */
 @media screen and (min-width: 960px) {
-  
 }
 
 /* desktop */
 @media screen and (min-width: 1200px) {
-  
 }

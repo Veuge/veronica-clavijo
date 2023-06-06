@@ -43,7 +43,7 @@ MimeType=x-scheme-handler/slack;
 La linea interesante aqui es `Icon=/usr/share/pixmaps/slack.png`, el archivo de imagen especificado es totalmente válido, existe y tiene permisos correctos.
 
 ```bash
-$ ls -l /usr/share/pixmaps/slack.png 
+$ ls -l /usr/share/pixmaps/slack.png
 
 # Output
 -rw-rw-r-- 1 root root 38884 Mar 15 20:12 /usr/share/pixmaps/slack.png
@@ -70,7 +70,6 @@ Una vez se ejecuta el comando `xtseticon` el resultado es:
 ![Panel de XFCE con icono válido de Slack](./window-panel-after.png "Panel de XFCE con icono válido de Slack")
 
 Obviamente como dice la discusión en Reddit, no es optimo seguir ese proceso manualmente cada que se abre Slack (o cualquier otra aplicación con este problema), entonces la manera de actualizar es modificando el parametro `Exec` en `/usr/share/applications/slack.desktop` para modificar el icono cuando hay la certeza que Slack ha iniciado.
-
 
 Para esto el repliqué el proceso descrito en [este comentario](https://www.reddit.com/r/xfce/comments/g3m4zk/icon_absent_for_snap_package_installed/fnvijl2?utm_source=share&utm_medium=web2x&context=3) dentro de un [script](https://github.com/Veuge/Configuration-files/blob/master/slack-init.sh), y finalmente ese script ejecutarlo en `slack.desktop`.
 
@@ -114,9 +113,3 @@ MimeType=x-scheme-handler/slack;
 - Esta solución es solo un workaround para restaurar el icono de Slack y otras aplicaciones en XFCE, idealmente se deberia determinar exactamente la razon por la cual el icono no está disponible.
 - El workaround funciona bien cuando se inicia manualmente Slack y cuando está entre la aplicacion que se auto-inician al iniciar sesión.
 - Se puede mejorar el script para hacerlo mas configurable para que sea extensible a otras aplicaciones con este error en el ícono. (Lo haré en algun momento...)
-
-```js
-const x = () => {
-  console.log('This is a statement');
-}
-```

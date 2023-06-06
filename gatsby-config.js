@@ -7,23 +7,23 @@ module.exports = {
       twitter: "https://twitter.com/Veuge_C",
       github: "https://github.com/Veuge",
       linkedin: "https://www.linkedin.com/in/veronica-clavijo-altamirano/",
-      email: "veuge.clavijo@gmail.com"
-    }
+      email: "veuge.clavijo@gmail.com",
+    },
   },
   plugins: [
     {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `images`,
-        path: `${__dirname}/src/images`
-      }
+        path: `${__dirname}/src/images`,
+      },
     },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `blog`,
-        path: `${__dirname}/src/content/blog`
-      }
+        path: `${__dirname}/src/content/blog`,
+      },
     },
     `gatsby-plugin-image`,
     `gatsby-remark-images`,
@@ -40,11 +40,11 @@ module.exports = {
             resolve: `gatsby-remark-images`,
             options: {
               maxWidth: 1200,
-              wrapperStyle: () => `margin-block: 1rem;`
+              wrapperStyle: () => `margin-block: 1rem;`,
             },
           },
         ],
-      }
-    }
+      },
+    },
   ],
 };

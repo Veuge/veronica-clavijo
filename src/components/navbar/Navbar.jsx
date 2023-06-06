@@ -3,7 +3,6 @@ import { Link } from "gatsby";
 
 import { composeClasses } from "../../helpers/index";
 import Header from "./Header";
-
 import * as styles from "./navbar.module.scss";
 
 export default function Navbar() {
@@ -35,4 +34,4 @@ export default function Navbar() {
       </div>
     </nav>
   );
-};
+}

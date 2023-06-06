@@ -34,7 +34,6 @@ export const sectionNameColors = {
     title: "$ whoami",
     highlightColor: MAIN_BLUE,
   },
-}
+};
 
-export const getHighlightColor = (section) =>
-  sectionNameColors[section].highlightColor;
+export const getHighlightColor = (section) => sectionNameColors[section].highlightColor;
