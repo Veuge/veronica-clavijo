@@ -1,0 +1,30 @@
+name: Lint and Prettier Check
+
+on:
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  lint-and-format:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Run ESLint
+        run: npm run lint -- --max-warnings=0
+
+      - name: Check Prettier Formatting
+        run: |
+          npm run check-format -- --quiet --list-different
+          if [ $? -ne 0 ]; then exit 1; fi
