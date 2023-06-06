@@ -19,12 +19,12 @@ jobs:
           node-version: 14
 
       - name: Install Dependencies
-        run: npm ci
+        run: yarn install --frozen-lockfile
 
       - name: Run ESLint
-        run: npm run lint -- --max-warnings=0
+        run: yarn lint -- --max-warnings=0
 
       - name: Check Prettier Formatting
         run: |
-          npm run check-format -- --quiet --list-different
+          yarn check-format -- --quiet --list-different
           if [ $? -ne 0 ]; then exit 1; fi
