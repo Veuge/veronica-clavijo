@@ -14,7 +14,8 @@
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "lint": "eslint .",
-    "format": "prettier --write . --ignore-path .prettierignore"
+    "format": "prettier --write . --ignore-path .prettierignore",
+    "check-format": "prettier --check . --ignore-path .prettierignore"
   },
   "dependencies": {
     "@fontsource/ibm-plex-sans": "^4.5.0",
