@@ -26,5 +26,4 @@ jobs:
 
       - name: Check Prettier Formatting
         run: |
-          yarn check-format -- --quiet --list-different
-          if [ $? -ne 0 ]; then exit 1; fi
+          yarn check-format -- --max-warnings=0
