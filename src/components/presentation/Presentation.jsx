@@ -10,7 +10,7 @@ import * as classNames from "./presentation.module.scss";
 const Presentation = () => {
   const { file, site } = useStaticQuery(graphql`
     query PresentationQuery {
-      file(relativePath: { eq: "profile2.jpg" }) {
+      file(relativePath: { eq: "profile3.jpg" }) {
         childImageSharp {
           gatsbyImageData(
             layout: CONSTRAINED
@@ -41,10 +41,9 @@ const Presentation = () => {
       <div className={classNames.profilePicContainer}>
         <GatsbyImage
           image={getImage(file)}
-          alt={"hey"}
+          alt={"Veronica Clavijo"}
           loading="lazy"
           className={classNames.avatar}
-          style={{ borderRadius: "50%" }}
         />
       </div>
       <div className={classNames.content}>
