@@ -19,12 +19,12 @@ const Layout = ({ section, children, style }) => {
           style={style || {}}
         >
           <article>{children}</article>
-          {![HOME, WHOAMI].includes(section) && (
-            <footer>
-              <Info />
-            </footer>
-          )}
         </div>
+        {![HOME, WHOAMI].includes(section) && (
+          <footer style={{ display: 'flex', justifyContent: 'center', width: '70%', margin: 'auto' }}>
+            <Info />
+          </footer>
+        )}
       </main>
     </Fragment>
   );
