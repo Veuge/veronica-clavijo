@@ -1,0 +1,10 @@
+- name: Deploy with gh-pages
+  on:
+    push:
+      branches:
+        - master
+  run: |
+    git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${REPO}
+    npx gh-pages -d build -u "github-actions-bot <support+actions@github.com>"
+   env:
+    GITHUB_TOKEN: ${{ secrets.TOKEN }}
