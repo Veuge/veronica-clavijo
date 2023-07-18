@@ -21,7 +21,9 @@ const Layout = ({ section, children, style }) => {
           <article>{children}</article>
         </div>
         {![HOME, WHOAMI].includes(section) && (
-          <footer style={{ display: 'flex', justifyContent: 'center', width: '70%', margin: 'auto' }}>
+          <footer
+            style={{ display: "flex", justifyContent: "center", width: "70%", margin: "auto" }}
+          >
             <Info />
           </footer>
         )}
