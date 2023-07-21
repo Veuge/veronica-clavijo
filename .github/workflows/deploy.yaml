@@ -30,3 +30,4 @@ jobs:
           personal_token: ${{ secrets.GH_TOKEN }}
           external_repository: Veuge/veuge.github.io
           publish_dir: ./public
+          publish_branch: master
