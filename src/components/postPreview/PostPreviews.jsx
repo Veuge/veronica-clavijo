@@ -15,7 +15,7 @@ export default function PostPreview() {
             fileAbsolutePath
             frontmatter {
               title
-              date(formatString: "d MMMM YYYY", locale: "es")
+              date(formatString: "D MMMM YYYY", locale: "es")
               description
               tags
             }
