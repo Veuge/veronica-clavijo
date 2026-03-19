@@ -50,13 +50,21 @@ const BlogPost = ({ data, children }) => {
 export default BlogPost;
 
 export const query = graphql`
-  query PostById($id: String!) {
+  query PostByIdAndLanguage($id: String!, $language: String!) {
     mdx(id: { eq: $id }) {
       frontmatter {
         date(formatString: "D MMMM YYYY", locale: "es")
         title
         description
-        tags
+      }
+    }
+    locales: allLocale(filter: { language: { eq: $language } }) {
+      edges {
+        node {
+          ns
+          data
+          language
+        }
       }
     }
   }
