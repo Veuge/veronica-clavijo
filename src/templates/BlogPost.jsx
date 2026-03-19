@@ -1,3 +1,4 @@
+import React from "react";
 import { graphql } from "gatsby";
 import { MDXProvider } from "@mdx-js/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
