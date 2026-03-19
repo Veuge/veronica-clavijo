@@ -1,4 +1,5 @@
 import { graphql } from "gatsby";
+import React from "react";
 import { MDXProvider } from "@mdx-js/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsisV } from "@fortawesome/free-solid-svg-icons";

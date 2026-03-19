@@ -1,4 +1,5 @@
 import "@fontsource/ibm-plex-sans";
+import React from "react";
 import Layout from "../components/layout/Layout";
 import Presentation from "../components/presentation/Presentation";
 import { HOME } from "../helpers";

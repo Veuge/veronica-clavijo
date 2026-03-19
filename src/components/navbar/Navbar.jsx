@@ -1,3 +1,4 @@
+import React from "react";
 import { Link } from "gatsby";
 
 import { composeClasses } from "../../helpers/index";
