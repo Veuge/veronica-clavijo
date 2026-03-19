@@ -1,4 +1,3 @@
-import React from "react";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 
 import * as styles from "./intro.module.scss";
