@@ -1,4 +1,3 @@
-import React from "react";
 import { graphql, useStaticQuery } from "gatsby";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
