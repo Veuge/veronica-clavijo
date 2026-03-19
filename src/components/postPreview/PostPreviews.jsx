@@ -9,17 +9,19 @@ import * as styles from "./postpreviews.module.scss";
 export default function PostPreview() {
   const { allMdx } = useStaticQuery(graphql`
     query PostPreviews {
-      allMdx(sort: { fields: frontmatter___date, order: DESC }) {
+      allMdx(sort: { frontmatter: { date: DESC } }) {
         edges {
           node {
-            fileAbsolutePath
+            id
+            fields {
+              slug
+            }
             frontmatter {
               title
               date(formatString: "D MMMM YYYY", locale: "es")
               description
               tags
             }
-            slug
           }
         }
       }
@@ -30,12 +32,12 @@ export default function PostPreview() {
     <div className={styles.postPreviews}>
       {allMdx.edges.map(({ node }) => (
         <Link
-          to={node.slug}
-          key={node.slug}
+          to={`/posts${node.fields.slug}`}
+          key={node.fields.slug}
         >
           <article
             className={styles.postPreviewContainer}
-            key={node.fileAbsolutePath}
+            key={node.id}
           >
             <h1>{node.frontmatter.title}</h1>
             <h3>{node.frontmatter.description}</h3>

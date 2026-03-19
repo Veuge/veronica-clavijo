@@ -1,5 +1,4 @@
 import { graphql } from "gatsby";
-import { MDXRenderer } from "gatsby-plugin-mdx";
 import React from "react";
 import { MDXProvider } from "@mdx-js/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -15,9 +14,9 @@ const components = {
   pre: CodeBlock,
 };
 
-const BlogPost = ({ data }) => {
+const BlogPost = ({ data, children }) => {
   const {
-    mdx: { frontmatter, body },
+    mdx: { frontmatter },
   } = data;
   return (
     <Layout section={POSTS}>
@@ -42,7 +41,7 @@ const BlogPost = ({ data }) => {
             )}
           </div>
           <MDXProvider components={components}>
-            <MDXRenderer>{body}</MDXRenderer>
+            {children}
           </MDXProvider>
         </div>
       </article>
@@ -53,10 +52,8 @@ const BlogPost = ({ data }) => {
 export default BlogPost;
 
 export const query = graphql`
-  query PostBySlug($slug: String) {
-    mdx(slug: { eq: $slug }) {
-      slug
-      body
+  query PostById($id: String!) {
+    mdx(id: { eq: $id }) {
       frontmatter {
         date(formatString: "D MMMM YYYY", locale: "es")
         title

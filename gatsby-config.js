@@ -13,20 +13,13 @@ module.exports = {
   plugins: [
     {
       resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `images`,
-        path: `${__dirname}/src/images`,
-      },
+      options: { name: `images`, path: `${__dirname}/src/images` },
     },
     {
       resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `blog`,
-        path: `${__dirname}/src/content/blog`,
-      },
+      options: { name: `blog`, path: `${__dirname}/src/content/blog` },
     },
     `gatsby-plugin-image`,
-    `gatsby-remark-images`,
     `gatsby-plugin-sharp`,
     `gatsby-transformer-sharp`, // Needed for dynamic images
     `gatsby-plugin-fontawesome-css`,
