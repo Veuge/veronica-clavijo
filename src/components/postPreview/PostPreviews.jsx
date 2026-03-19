@@ -65,7 +65,10 @@ export default function PostPreview() {
                     className={styles.separatorIcon}
                   />
                   {node?.frontmatter?.tags?.map((tag) => (
-                    <Tag key={tag} tag={tag} />
+                    <Tag
+                      key={tag}
+                      tag={tag}
+                    />
                   ))}
                 </>
               )}
