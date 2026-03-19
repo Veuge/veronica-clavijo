@@ -4,6 +4,7 @@ import { Link } from "gatsby";
 import { composeClasses } from "../../helpers/index";
 import Header from "./Header";
 import * as styles from "./navbar.module.scss";
+import LanguageSwitcher from "../languageSwitcher/LanguageSwitcher";
 
 export default function Navbar() {
   return (
@@ -31,6 +32,7 @@ export default function Navbar() {
         >
           $ whoami
         </Link>
+        <LanguageSwitcher />
       </div>
     </nav>
   );

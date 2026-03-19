@@ -1,43 +1,69 @@
-const { createFilePath } = require("gatsby-source-filesystem");
-const templatePath = require("path");
+const path = require("path");
+const LANGUAGES = ["en", "es"];
+const DEFAULT_LANGUAGE = "es";
 
 exports.onCreateNode = ({ node, actions, getNode }) => {
-  if (node.internal.type !== "Mdx") {
-    return;
-  }
+  const { createNodeField } = actions;
 
-  actions.createNodeField({
-    node,
-    name: "slug",
-    value: createFilePath({ node, getNode }),
-  });
+  if (node.internal.type === "Mdx") {
+    const fileNode = getNode(node.parent);
+    const slug = `/${fileNode.relativeDirectory}/`;
+
+    createNodeField({
+      node,
+      name: `slug`,
+      value: slug,
+    });
+  }
 };
 
 exports.createPages = async ({ graphql, actions }) => {
-  const { data } = await graphql(`
-    query BlogPostSlugs {
+  const { createPage } = actions;
+  const postTemplate = path.resolve(`./src/templates/BlogPost.jsx`);
+
+  const result = await graphql(`
+    query {
       allMdx {
-        nodes {
-          id
-          fields {
-            slug
-          }
-          internal {
-            contentFilePath
+        edges {
+          node {
+            id
+            fields {
+              slug
+            }
+            internal {
+              contentFilePath
+            }
           }
         }
       }
     }
   `);
 
-  data.allMdx.nodes.forEach((node) => {
-    actions.createPage({
-      path: `/posts${node.fields.slug}`,
-      component: `${templatePath.resolve("./src/templates/BlogPost.jsx")}?__contentFilePath=${
-        node.internal.contentFilePath
-      }`,
+  if (result.errors) throw result.errors;
+
+  result.data.allMdx.edges.forEach(({ node }) => {
+    const isSpanish = node.internal.contentFilePath.endsWith(".es.mdx");
+    const language = isSpanish ? "es" : "en";
+    const slug = node.fields.slug.replace(/\.es\/$/, "/");
+    const pagePath = language === DEFAULT_LANGUAGE ? `/posts${slug}` : `/${language}/posts${slug}`;
+    const originalPath = `/posts${slug}`;
+
+    createPage({
+      path: pagePath,
+      component: `${postTemplate}?__contentFilePath=${node.internal.contentFilePath}`,
       context: {
         id: node.id,
+        slug,
+        language,
+        i18n: {
+          language,
+          languages: LANGUAGES,
+          defaultLanguage: DEFAULT_LANGUAGE,
+          generateDefaultLanguagePage: false,
+          routed: language !== DEFAULT_LANGUAGE,
+          originalPath,
+          path: pagePath,
+        },
       },
     });
   });

@@ -13,6 +13,13 @@ module.exports = {
   plugins: [
     {
       resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `locale`,
+        path: `${__dirname}/locales`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
       options: { name: `images`, path: `${__dirname}/src/images` },
     },
     {
@@ -37,6 +44,21 @@ module.exports = {
             },
           },
         ],
+      },
+    },
+    {
+      resolve: `gatsby-plugin-react-i18next`,
+      options: {
+        localeJsonSourceName: `locale`,
+        languages: [`en`, `es`],
+        defaultLanguage: `es`,
+        siteUrl: `https://veuge.github.io`,
+        trailingSlash: `always`,
+        i18nextOptions: {
+          interpolation: { escapeValue: false },
+          keySeparator: false,
+          nsSeparator: false,
+        },
       },
     },
   ],
