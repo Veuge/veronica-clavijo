@@ -40,9 +40,7 @@ const BlogPost = ({ data, children }) => {
               </>
             )}
           </div>
-          <MDXProvider components={components}>
-            {children}
-          </MDXProvider>
+          <MDXProvider components={components}>{children}</MDXProvider>
         </div>
       </article>
     </Layout>
