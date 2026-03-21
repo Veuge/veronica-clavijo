@@ -2,5 +2,8 @@
   "name": "Este en un Hotfix",
   "description": "Escrito por",
   "blog_section": "Anotaciones",
-  "short_description": "Apuntes de React, React Native, JS, y algunas cosas más."
+  "short_description": "Apuntes de React, React Native, JS, y algunas cosas más.",
+  "about_me_p1": "Hola, mi nombre es Verónica Clavijo (<0>Vero</0> o <1>Veuge</1>). Trabajo como Desarrolladora desde 2017, principalmente en proyectos de Estados Unidos y Europa. Trabajo principalmente con Javascript, React y React Native. En busca de ser Fullstack.",
+  "about_me_p2": "Bienvenido a mi <0>jardin digital</0>, aqui trataré de escribir mis aprendizajes del día a día, proyectos personales y misceláneos. Nada aqui está en su versión final, todo está en constante evolución y trataré de actualizar de esa manera los contenidos.",
+  "about_me_p3": "Si quieres charlar puedes encontrarme en:"
 }
