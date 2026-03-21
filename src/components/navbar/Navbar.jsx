@@ -18,7 +18,7 @@ export default function Navbar() {
           to="/posts"
           activeClassName={styles.activeNavLink}
         >
-          {t('blog_section')}
+          {t("blog_section")}
         </Link>
         {/* <Link
           className={composeClasses(styles.navLink, styles.navLinkRed)}

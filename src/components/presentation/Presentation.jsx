@@ -59,7 +59,16 @@ const Presentation = () => {
         <p>
           <Trans
             i18nKey="about_me_p2"
-            components={[<a key="0" href="https://maggieappleton.com/garden-history" target="_blank" rel="noreferrer">digital garden</a>]}
+            components={[
+              <a
+                key="0"
+                href="https://maggieappleton.com/garden-history"
+                target="_blank"
+                rel="noreferrer"
+              >
+                digital garden
+              </a>,
+            ]}
           />
         </p>
         <br />
