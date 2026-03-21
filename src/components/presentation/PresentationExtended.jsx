@@ -1,6 +1,7 @@
 import React from "react";
 import { graphql, useStaticQuery } from "gatsby";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
+import { Trans } from "react-i18next";
 
 import * as classNames from "./presentation.module.scss";
 
@@ -33,35 +34,45 @@ const PresentationExtended = () => {
       />
       <div className={classNames.content}>
         <p>
-          Hola, hola!. Mi nombre es Verónica Clavijo (puedes llamarme que <span>Vero</span> es mas
-          corto y amigable o <span>Veuge</span> que es la <i>inteligente</i> abreviación de mis dos
-          nombres - Verónica Eugenia).
+          <Trans
+            i18nKey="whoami_p1"
+            components={[<span key="0">Vero</span>, <span key="1">Veuge</span>, <i key="2">inteligente</i>]}
+          />
         </p>
         <br />
         <p>
-          Por un por un voto de confianza de dos buenos amigos comencé a trabajar el 2017 como
-          desarrolladora (casi inmediatamente después de graduarme de la Universidad como Licenciada
-          de Informática y con nada de experiencia en el desarrollo de software), inicialmente como
-          lo que llamaban <i>ghost dev</i>, hacia commits a nombre de un miembro del equipo en el
-          que estaba hasta ganarme mi lugar xD. Pasé por muchos proyectos en este tiempo, comenzando
-          por ExtJS, React, React Native y actualmente NodeJS y ExpressJS. lo que es muy bueno
-          porque ya hacían varios anhos en los que estaba buscando ser FullStack developer.
+          <Trans
+            i18nKey="whoami_p2"
+            components={[<i key="0">ghost dev</i>]}
+          
+          />
         </p>
         <br />
         {
           /* <p>Fuera del trabajo estoy todavía encontrando lo que me gusta, definitivamente me gusta viajar, hacer caminatas. Paso mucho tiempo con mi familia, me encanta jugar y hablar con mis sobrinos, claramente tengo mis favoritos pero ellos no saben. En los años de colegio pase mas de 7 años bailando en un Ballet Folklórico que ocasionalmente hacía presentaciones de música contemporánea también, eso no terminó bien, pero el recuerdo queda y las fotos tambien.</p>
         <br/> */
-          <h3>Que uso?</h3>
+          <h3><Trans i18nKey="whoami_p3" /></h3>
         }
         <dl>
-          <dt>Operating System</dt>
+          <dt><Trans i18nKey="operating_system" /></dt>
           <dd>Debian 11 (bullseye)</dd>
 
-          <dt>Desktop Environment</dt>
+          <dt><Trans i18nKey="desktop_environment" /></dt>
           <dd>XFCE 4.16</dd>
 
           <dt>Terminal</dt>
           <dd>
+            <Trans
+              i18nKey="terminal"
+              components={[<a
+              key="0"
+              href={"https://github.com/Veuge/Configuration-files/blob/master/tmux.conf"}
+              target="_blank"
+              rel="noreferrer"
+            >
+              esta
+            </a>]}
+            />
             Guake + tmux (con{" "}
             <a
               href={"https://github.com/Veuge/Configuration-files/blob/master/tmux.conf"}
@@ -73,16 +84,16 @@ const PresentationExtended = () => {
             configuración)
           </dd>
 
-          <dt>Editor de código</dt>
+          <dt><Trans i18nKey="code_editor" /></dt>
           <dd>
             VS Code + <a href="https://github.com/daltonmenezes/aura-theme">Aura Theme</a> +{" "}
             <a href="https://www.jetbrains.com/lp/mono/">JetBrains Mono</a>
           </dd>
 
-          <dt>Navegador</dt>
+          <dt><Trans i18nKey="browser" /></dt>
           <dd>Brave</dd>
 
-          <dt>Notas y Knowledge Base</dt>
+          <dt><Trans i18nKey="notes" /></dt>
           <dd>Notion</dd>
         </dl>
       </div>

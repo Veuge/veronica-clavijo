@@ -5,5 +5,14 @@
   "short_description": "Apuntes de React, React Native, JS, y algunas cosas más.",
   "about_me_p1": "Hola, mi nombre es Verónica Clavijo (<0>Vero</0> o <1>Veuge</1>). Trabajo como Desarrolladora desde 2017, principalmente en proyectos de Estados Unidos y Europa. Trabajo principalmente con Javascript, React y React Native. En busca de ser Fullstack.",
   "about_me_p2": "Bienvenido a mi <0>jardin digital</0>, aqui trataré de escribir mis aprendizajes del día a día, proyectos personales y misceláneos. Nada aqui está en su versión final, todo está en constante evolución y trataré de actualizar de esa manera los contenidos.",
-  "about_me_p3": "Si quieres charlar puedes encontrarme en:"
+  "about_me_p3": "Si quieres charlar puedes encontrarme en:",
+  "whoami_p1": "Hola, hola!. Mi nombre es Verónica Clavijo (puedes llamarme que <0>Vero</0> es mas corto y amigable o <1>Veuge</1> que es la <2>inteligente</2> abreviación de mis dos nombres: Verónica Eugenia).",
+  "whoami_p2": "Comencé a trabajar el 2017 como desarrolladora (casi inmediatamente después de graduarme de la Universidad como Licenciada de Informática y con nada de experiencia en el desarrollo de software), inicialmente como lo que llamaban <0>ghost dev</0>, hacia commits a nombre de un miembro del equipo en el que estaba hasta ganarme mi lugar xD. Pasé por muchos proyectos en este tiempo, comenzando por ExtJS, React, React Native y actualmente NodeJS y ExpressJS. lo que es muy bueno porque ya hacían varios anhos en los que estaba buscando ser FullStack developer.",
+  "whoami_p3": "¿Qué uso?",
+  "operating_system": "Sistema Operativo",
+  "desktop_environment": "Entorno de Escritorio",
+  "terminal": "Guake + tmux with <0>this</0> configuration",
+  "code_editor": "Editor de Código",
+  "browser": "Navegador",
+  "notes": "Notes y Base de Conocimientos"
 }
