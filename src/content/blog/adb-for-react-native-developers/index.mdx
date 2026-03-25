@@ -1,147 +1,145 @@
 ---
-title: "ADB para desarrolladores en React Native"
+title: "ADB for React Native Developers"
 date: "2020-01-17"
-description: "Han habido ocasiones en las que he necesitado abrir AndroidStudio para realizar una simple tarea relacionada con el dispositivo Android. ¿Hay una manera más rápida?"
-tags: ["react-native", "consola"]
----
+description: "There have been times when I needed to open AndroidStudio to perform a simple task related to the Android device. Is there a faster way?"
+tags: ["react-native", "command-line"]
+--- 
 
-En el tiempo que llevo desarrollando aplicaciones móviles con React Native muchas veces he tenido que abrir AndroidStudio para poder hacer _algo_ relacionado con el dispositivo (emulador o dispositivo físico).
+This time that I've been developing mobile applications with React Native, many times I had to open AndroidStudio to do _something_ related to the device (emulator or physical device).
 
-Para aquellos que alguna vez han desarrollado para Android saben que AndroidStudio tarda un par de minutos en iniciar y que consume mucha memoria. Tiempo y recursos que no valen la pena ser utilizados para tareas sencillas y repetitivas...
+For those who have ever developed for Android, you know that AndroidStudio takes a couple of minutes to start and consumes a lot of memory. Time and resources that are not worth being used for simple and repetitive tasks...
 
-Aprender un par de comandos de ADB me ha ayudado a hacer dichas tareas de manera más sencilla y rápida usando la línea de comandos, sin mencionar que me gusta mucho hacer cosas con la terminal :P.
+Learning a couple of ADB commands has helped me to do those tasks in a simpler and faster way using the command line, not to mention that I really like doing things with the terminal :P.
 
-# ¿Qué es ADB?
+# What is ADB?
 
-Según la [definición oficial](https://developer.android.com/studio/command-line/adb), Android Debug Bridge es una herramienta de línea de comandos que permite interactuar con el dispositivo con el que estás debuggeando una aplicación Android en desarrollo. Básicamente, un comando.
+According to the [official definition](https://developer.android.com/studio/command-line/adb), Android Debug Bridge is a command-line tool that allows you to interact with the device you are debugging an Android application on development. Basically, a command.
 
-ADB tiene muchas opciones y argumentos que permiten ejecutar tareas diferentes en el emulador o dispositivo físico. Pero la estructura básica es:
+ADB has many options and arguments that allow you to execute different tasks on the emulator or physical device. But the basic structure is:
 
 ```bash
-adb [opción] comando
+adb [option] command
 ```
 
-El argumento `opción` es innecesario si solo tienes un dispositivo o emulador conectado y `comando` es la acción que quieres ejecutar (es un argumento requerido).
+The `option` argument is unnecessary if you only have one device or emulator connected and `command` is the action you want to execute (it is a required argument).
 
-Hay una lista muy larga de comandos que puedes ejecutar con `adb` para interactuar con el almacenamiento del dispositivo, para configurar los puertos, configurar el WiFi o las opciones de red y hasta tomar screenshots o grabar la pantalla del dispositivo.
+There is a very long list of commands that you can execute with `adb` to interact with the device storage, to set up ports, configure WiFi or network options and even take screenshots or record the device screen.
 
-Para ver todas las alternativas puedes ejecutar desde una línea de comandos
+To see all the alternatives you can execute from a command line
 
 ```bash
 adb --help
 ```
 
-o consultar la [documentación oficial](https://developer.android.com/studio/command-line/adb). En este post voy a describir solo unas cuantas que uso frecuentemente...
+or check the [official documentation](https://developer.android.com/studio/command-line/adb). In this post, I will describe only a few that I use frequently...
 
 ## 1. Port Forwarding
 
-Este es un clásico, configurar la redirección de puertos. Si usas librerias como [Storybook](https://storybook.js.org/) o [Reactotron](https://infinite.red/reactotron) te encuentras con que necesitas comunicar el puerto del dispositivo que usan estas librerias a un puerto de tu maquina de desarrollo, `adb` te ayuda con esto!
+This is a classic, setting up port forwarding. If you use libraries like [Storybook](https://storybook.js.org/) or [Reactotron](https://infinite.red/reactotron) you find that you need to communicate the device port that these libraries use to a port on your development machine, `adb` helps you with this!
 
 ```bash
-adb reverse <puerto-remoto> <puerto-local>
+adb reverse <remote-port> <local-port>
 ```
 
-En el caso de [Storybook](https://storybook.js.org/docs/guides/guide-react-native/) el puerto remoto es `tcp:7007`, por lo que el comando `adb` es:
+In the case of [Storybook](https://storybook.js.org/docs/guides/guide-react-native/) the remote port is `tcp:7007`, so the `adb` command is:
 
 ```bash
 adb reverse tcp:7007 tcp:7007
 ```
 
-## 2. Abrir el menú de desarrollo
+## 2. Open the development menu
 
-Si, ya sé que esto mismo se puede hacer con la combinación de teclado `Ctrl + M` (o `Cmd + M` para los usuarions de macOS). Pero yo lo hago con línea de comandos porque... se puede! xD
+Yes, I know that this can also be done with the keyboard combination `Ctrl + M` (or `Cmd + M` for macOS users). But I do it with command line just because! xD
 
 ```bash
 adb shell input keyevent 82
 ```
 
-## 3. Copiar archivos desde y hacia el almacenamiento del dispositivo
+### 3. Copy files from and to the device storage
 
-Para copiar un archivo **hacia** el almacenamiento del dipositivo:
+To copy a file **to** the device storage:
 
 ```bash
-adb push <archivo-local> <archivo-dispositivo>
-```
+adb push <local-file> <remote-location>
+``` 
 
-Por ejemplo:
+For example:
 
 ```bash
 adb push ~/Downloads/image.png /sdcard/Downloads/image.png
 ```
 
-Para copiar un archivo **desde** el almacenamiento del dispositivo hacia tu máquina de desarrollo:
+To copy a file **from** the device storage to your development machine:
 
 ```bash
-adb pull <archivo-disposivo> <archivo-local>
+adb pull <remote-file> <local-location>
 ```
 
-Por ejemplo:
+For example:
 
 ```bash
 adb pull /sdcard/Downloads/voice.aac ~/Downloads/voice.aac
 ```
 
-## 4. Instalar una app
+## 4. Install an app
 
-Si tienes un instalador .apk válido que quisieras instalar en un dispositivo desde la línea de comandos:
+If you have a valid .apk installer that you want to install on a device from the command line:
 
 ```bash
-adb install <archivo-apk>
+adb install <apk-file>
 ```
 
-## 5. Sacar screenshot
+## 5. Take a screenshot
 
-Es útil también tomar una captura de pantalla del dispositivo en un determinado momento para documentar el estado de la aplicación. Se logra facilmente con la siguiente sintaxis del comando:
+It is also useful to take a screenshot of the device screen from the command line, for example, to share it with your team or to use it in a bug report:
 
 ```bash
-adb shell screencap <nombre-de-archivo>
+adb shell screencap <remote-file>
 ```
 
-Por ejemplo, el resultado de:
+For example:
 
 ```bash
-adb shell screencap /sdcard/Pictures/captura-pantalla.png
+adb shell screencap /sdcard/Downloads/screenshot.png
 ```
 
-es una imagen en `/sdcard/Pictures` con el nombre `captura-pantalla.png`.
+## 6. Record the device screen
 
-## 6. Grabar video de la pantalla
-
-Así como se puede obtener una captura de pantalla, es también posible grabar un video de la pantalla.
+Just like taking a screenshot, you can also record the device screen with the following command:
 
 ```bash
-adb shell screenrecord <nombre-de-archivo>
+adb shell screenrecord <remote-file>
 ```
 
-Para parar la grabación basta con presionar la combinación de teclado `Ctrl + C`.
+To stop the recording just press `Ctrl + C` in the terminal.
 
-Por ejemplo:
+For example:
 
 ```bash
-adb shell screenrecord /sdcard/Video/record.mp4
+adb shell screenrecord /sdcard/Downloads/record.mp4
 
-# 10 segundos después
+# 10 seconds later
 Ctrl + C
 ```
 
 ## Bonus!
 
-Este no es un comando de ADB en sí, pero es posible abrir un emulador Android mediante la línea de comandos.
+This is not an ADB command, but it is a useful command to open an Android emulator from the command line.
 
-En el directorio donde está instalado el Android SDK y dentro del directorio emulator (`/path/to/Android/Sdk/emulator`) existe un ejecutable llamado `emulator` con el cual se puede levantar un emulador:
+Inside the directory where you have the Android SDK installed and inside the emulator directory (`/path/to/Android/Sdk/emulator`) there is an executable called `emulator` that you can use to start an emulator:
 
 ```bash
 cd /path/to/Android/Sdk/emulator
-./emulator @<nombre-del-emulador>
+./emulator @<emulator-name>
 ```
 
-Para tener una lista de los emuladores disponibles para ejecutar:
+And to have a list of the available emulators:
 
 ```bash
 ./emulator -list-avds
 ```
 
-En mi caso la salida de este último comando es:
+In my case the output of the previous command is:
 
 ```bash
 # Example Response!
@@ -151,12 +149,12 @@ Pixel_2_API_25
 Pixel_2_API_26
 ```
 
-Por lo que un ejemplo de comando para ejecutar el emulador Pixel2 es:
+So an example command to start the Pixel2 emulator is:
 
 ```bash
-emulator @Pixel2
+./emulator @Pixel2
 ```
 
-Por facilidad yo creé un link simbolico que apunta al ejecutable `/path/to/Android/Sdk/emulator/emulator` ;)
+To ease the process I created a symbolic link to the pointing to the executable `/path/to/Android/Sdk/emulator/emulator` ;)
 
-Básicamente esos son los comandos que uso diaramente para desarrollar con React Native para Android. Saludos!
+Basically, those are the commands that I use daily to develop with React Native for Android. Cheers!
