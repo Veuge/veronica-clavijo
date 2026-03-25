@@ -4,10 +4,12 @@ import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTwitter, faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import { Trans, useTranslation } from "react-i18next";
 
 import * as classNames from "./presentation.module.scss";
 
 const Presentation = () => {
+  const { t } = useTranslation();
   const { file, site } = useStaticQuery(graphql`
     query PresentationQuery {
       file(relativePath: { eq: "profile3.jpg" }) {
@@ -48,27 +50,30 @@ const Presentation = () => {
       </div>
       <div className={classNames.content}>
         <p>
-          Hola, mi nombre es Verónica Clavijo (<span>Vero</span> o <span>Veuge</span>). Trabajo como
-          Desarrolladora desde 2017, principalmente en proyectos de Estados Unidos y Europa. Trabajo
-          principalmente con Javascript, React y React Native. En busca de ser Fullstack.
+          <Trans
+            i18nKey="about_me_p1"
+            components={[<span key="0">Vero</span>, <span key="1">Veuge</span>]}
+          />
         </p>
         <br />
         <p>
-          Bienvenido a mi{" "}
-          <a
-            href="https://maggieappleton.com/garden-history"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <b>jardin digital</b>
-          </a>
-          , aqui trataré de escribir mis aprendizajes del día a día, proyectos personales y
-          misceláneos. Nada aqui está en su versión final, todo está en constante evolución y
-          trataré de actualizar de esa manera los contenidos.
+          <Trans
+            i18nKey="about_me_p2"
+            components={[
+              <a
+                key="0"
+                href="https://maggieappleton.com/garden-history"
+                target="_blank"
+                rel="noreferrer"
+              >
+                digital garden
+              </a>,
+            ]}
+          />
         </p>
         <br />
         <p>
-          <b>Si quieres charlar puedes encontrarme en:</b>
+          <b>{t("about_me_p3")}</b>
         </p>
         <div className={classNames.links}>
           <a

@@ -1,29 +1,27 @@
 ---
-title: "Módulos nativos de Android en React Native"
+title: "Android Native Modules in React Native"
 date: "2023-08-14"
-description: "React Native provee la facilidad de trabajar con módulos nativos de iOS y Android con el objetivo de proveer acceso a APIs de los dispositivos que podrían no estar disponibles mediante Javascript. Este artículo muestra un sencillo ejemplo para trabajar con modulos nativos en Android"
+description: "React Native provides the ease of working with native modules for iOS and Android with the goal of providing access to device APIs that may not be available through Javascript. This article shows a simple example of working with native modules on Android."
 tags: ["react-native", "native-modules", "android"]
 ---
 
-> Este artículo está escrito en base a la charla que dí en el [MDevConf](https://twitter.com/mdevconfbo) el 3 de Diciembre de 2022. Puedes encontrar las diapositivas de esta charla [aquí](https://slides.com/veronicaclavijoaltamirano/minimal).
+> This article is based on the talk I gave at [MDevConf](https://twitter.com/mdevconfbo) on December 3, 2022. You can find the slides for this talk [here](https://slides.com/veronicaclavijoaltamirano/minimal).
 
-Como ya debes saber React Native es un framework basado en React para crear aplicaciones nativas para iOS y Android utilizando Javascript, React Native tiene la capacidad de transpilar el codigo Javascript en código nativo de cada plataforma (Swift o Objective C para dispositivos iOS, Kotlin o Java para dispositivos Android), pero además en caso de necesitar escribir código nativo React Native expone la API `NativeModule` para facilitar este trabajo.
+As you may already know, React Native is a React-based framework for creating native applications for iOS and Android using Javascript. React Native has the ability to transpile Javascript code into native code for each platform (Swift or Objective C for iOS devices, Kotlin or Java for Android devices), but also in case you need to write native code, React Native exposes the `NativeModule` API to facilitate this work.
 
-La manera como React Native "transforma" el código Javascript / React a código nativo es usando el denominado _Bridge_ que básicamente es una conexión entre el código Javascript y el código nativo. 
+The way React Native "transforms" Javascript / React code into native code is by using the so-called _Bridge_, which is basically a connection between the Javascript code and the native code.
 
-![Ilustración del Bridge de React Native](./bridge.png "Ilustración del Bridge de React Native")
+![Illustration of the React Native Bridge](./bridge.png "Illustration of the React Native Bridge")
 
-Esto es lo que hace que los componentes de React Native sea convertido a componentes de las plataformas nativas. Por ejemplo un componente `View` de React Native es transformado a `ViewGroup` de Android y `UIView` de iOS.
+This is what allows React Native components to be converted into native components. For example, a `View` component in React Native is transformed into `ViewGroup` in Android and `UIView` in iOS.
 
-![Tabla de equivalencia de componentes React Native vs nativos](./componentes.png "Tabla de equivalencia de componentes React Native vs nativos")
+![Table of equivalence of React Native components vs native components](./componentes.png "Table of equivalence of React Native components vs native components")
 
-## ¿Cómo crear el primer Modulo Nativo de Android?
+## How to create the first Android Native Module?
 
-> Puedes seguir esta explicación en [este](https://github.com/Veuge/MDevConf) repositorio navegando los branches para ver el progreso.
+> You can follow [this](https://github.com/veronicaclavijo/react-native-android-native-module) explanation in this repository by navigating the different branches and see the progress.
 
-### 1. Crear un archivo de Módulo Nativo ([branch](https://github.com/Veuge/MDevConf/blob/1.native-module-file))
-
-Inicialmente necesitas crear un archivo java dentro de `android/app/src/main/java/com/{NOMBRE_DE_LA_APP}/MyNativeModule.java` con este contenido inicial:
+To start you need to create a java file inside `android/app/src/main/java/com/{APP_NAME}/MyNativeModule.java` with this initial content:
 
 ```java
 // MyNativeModule.java
@@ -48,16 +46,17 @@ public class MyNativeModule extends ReactContextBaseJavaModule {
 }
 ```
 
-Un detalle importante del código anterior en que la nueva clase Java tiene que extender de `ReactContextBaseJavaModule` que es base para construir el Módulo Nativo. También hay que notar el método `getName` que da el nombre al Módulo Nativo para que pueda ser accedido desde Javascript con ese mismo nombre, por ejemplo se podrá acceder a este en un componente React Native mediante:
+An important detail of the previous code is that the new Java class has to extend `ReactContextBaseJavaModule`, which is the base for building the Native Module. Also, note the `getName` method that gives the name to the Native Module so that it can be accessed from Javascript with that same name, for example, you can access this in a React Native component through:
 
 ```js
 const {MyNativeModule} = ReactNative.NativeModules;
 ```
 
-### 2. Exportar un método nativo Javascript ([branch](https://github.com/Veuge/MDevConf/tree/2.export-method))
-Se debe crear un metodo que eventualmente podrá ser usado desde Javascript, en este caso será un Logger simple que nos permita mostrar un mensaje el Logcat.
+### 2. Export a native method to Javascript ([branch](https://github.com/veronicaclavijo/react-native-android-native-module/tree/branch-2))
 
-Este método esta anotado con el decorador `@ReactMethod` para indicar que será utilizado dentro del código Javascript.
+You need to create a method that can eventually be used from Javascript, in this case, it will be a simple Logger that allows us to show a message in Logcat.
+
+This method is annotated with the `@ReactMethod` decorator to indicate that it will be used within the Javascript code.
 
 ```java
 // MyNativeModule.java
@@ -70,9 +69,9 @@ public class MyNativeModule extends ReactContextBaseJavaModule {
 }
 ```
 
-### 3. Registrar el módulo dentro de un package ([branch](https://github.com/Veuge/MDevConf/tree/3.register-in-package))
+### 3. Register the Native Module ([branch](https://github.com/Veuge/MDevConf/tree/3.register-in-package))
 
-El siguiente paso es registrar este modulo dentro de un package, para lo que se crea un nuevo archivo Java dentro de `android/app/src/main/java/com/{NOMBRE_DE_LA_APP}/MyNativePackage.java` con el siguiente contenido:
+The next step is to register this module in a package, to achieve this you need to create a new Java file inside `android/app/src/main/java/com/{APP_NAME}/MyPackage.java` with the following content:
 
 ```java
 // MyNativePackage.java
@@ -105,11 +104,11 @@ public class MyNativePackage implements ReactPackage {
 }
 ```
 
-Con este archivo lo que se hace es registrar el Modulo Nativo dentro de un package para que pueda ser usado utilizado en `MainApplication.java`
+With this file, what you do is register the Native Module within a package so that it can be used in `MainApplication.java`
 
-### 4. Registrar el package ([branch](https://github.com/Veuge/MDevConf/tree/4.register-in-mainapplication))
+### 4. Register the package ([branch](https://github.com/Veuge/MDevConf/tree/4.register-in-mainapplication))
 
-Para esto se debe modificar el archivo `MainApplication.java` como sigue:
+To achieve this, you need to modify the `MainApplication.java` file as follows:
 
 ```java
 // MainApplication.java
@@ -132,15 +131,15 @@ public class MainApplication extends Application implements ReactApplication {
 }
 ```
 
-Con estos cambios el Modulo Nativo esta listo para ser usado desde Javascript, en este punto es importante hacer correr la aplicacion desde cero con el comando
+With these changes, the Native Module is ready to be used from Javascript. At this point, it is important to run the application from scratch with the command:
 
 ```sh
 npx react-native run-android
 ```
 
-### 5. Import y utilizar en React Native! ([branch](https://github.com/Veuge/MDevConf/tree/5.import-and-use-in-rn))
+### 5. Import and use in React Native! ([branch](https://github.com/Veuge/MDevConf/tree/5.import-and-use-in-rn))
 
-En este punto ya podemos utilizar nuestro módulo nativo desde la aplicación en Javascript, para esto se debe modificar el archivo `App.js`:
+At this point you can import the Native Module in your React Native components and use it as follows:
 
 ```javascript
 // App.js
@@ -171,7 +170,7 @@ const App = () => {
 };
 ```
 
-Este es un ejemplo muy simple, lo que se hace es importar `NativeModules` del paquete `react-native`, destructurar el nombre de nuestro modulo nativo, en este caso lo llamamos `MyNativeModule`, una vez tenemos acceso al modulo nativo podemos invocar el metodo que exportamos para registrar un log en el logcat del dispositivo al activar un boton:
+This is a very simple example, what you need to do is import the `NativeModules` from `react-native`, destructure our native module, and in this example we named it `MyNativeModule`, once we have access to the native module we can invoke the method we exported to register a log in the device LogCat when we click the button.
 
 ```
 MyNativeModule.simpleLogger();
@@ -179,7 +178,7 @@ MyNativeModule.simpleLogger();
 
 ![Funcionamiento básico del modulo nativo](./diagrama.png "Funcionamiento básico del modulo nativo")
 
-Una vez que la aplicación este corriendo en el emulador y el usuario haga click en el boton se podrá ver el mensaje en la ventana de Logcat, como en la imagen:
+Once the app is running in an emulator and the user clicks the button, you should see the following log in LogCat:
 
 ![Logcat](./logcat.png "Logcat")
 
@@ -187,4 +186,3 @@ Una vez que la aplicación este corriendo en el emulador y el usuario haga click
 - [Documentacion oficial RN Native Modules](https://reactnative.dev/docs/native-modules-android)
 - [Presentación charla en MDevConf](https://slides.com/veronicaclavijoaltamirano/minimal)
 - [Repositorio de ejemplo](https://github.com/Veuge/MDevConf)
-
