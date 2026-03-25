@@ -1,13 +1,13 @@
 ---
-title: "Semi-automatización de TMUX"
+title: "TMUX Semi-automation"
 date: "2020-11-21"
-description: "Cómo semi-automatizar el inicio de sesión de TMUX con una configuración de específica de paneles y sus tareas con un solo comando!."
-tags: ["consola"]
+description: "How to semi-automate the TMUX login with a specific panel configuration and their tasks with a single command!."
+tags: ["terminal"]
 ---
 
-Desde hace tiempo que uso [TMUX](https://github.com/tmux/tmux) para hacer mas efectivo y fluido mi tiempo en la terminal.
+I have been using [TMUX](https://tmux.github.io/) for a while now, and it has made my time in the terminal more effective and fluid.
 
-Como en el trabajo paso la mayor parte del tiempo desarrollando una app en React Native mi configuracion de TMUX luce siempre igual y los paneles los uso para los mismos propósitos. Mis sesiones se ven asi:
+Since I spend most of my time developing a React Native app at work, my TMUX configuration always looks the same, and I use the panels for the same purposes. My sessions look like this:
 
 ```bash
  ------------------------------
@@ -17,70 +17,69 @@ Como en el trabajo paso la mayor parte del tiempo desarrollando una app en React
  ------------------------------
 ```
 
-El panel 1 se mantiene estático corriendo el metro-bundler de la app.
+Panel 1 remains static running the app's metro-bundler.
 
-El panel 2 lo utilizo para ejecutar `npx react-native run-{platform}` y para comandos git.
+Panel 2 is used to run `npx react-native run-{platform}` and for git commands.
 
-El panel 3 tiene el emulador corriendo.
+Panel 3 has the emulator running.
 
-Normalmente iniciaba tmux y manualmente construía los paneles e iniciaba las mismas tareas en cada panel, se hizo repetitivo hacerlo a diario.
+I would start tmux and manually build the panels and start the same tasks in each panel, it became repetitive to do it daily.
 
-Investigando un poco descubrí que puedo lograr la disposición de los paneles y las tareas de cada uno con un simple comando al momento de iniciar la sesión TMUX. Entonces esas son mis dos metas, lograr la estructura del layout e iniciar las tareas en cada panel.
+Investigating a bit I found out that I can achieve the panel layout and the tasks of each one with a simple command at the moment of starting the TMUX session. So those are my two goals, to achieve the layout structure and to start the tasks in each panel.
 
-## Paneles en proceso...
+## Panels in process...
 
-Para lograr el layout de **manera manual** siempre sigo los siguientes pasos:
+To achieve the layout **manually** I always follow the next steps:
 
 ```bash
-$ tmux          # Inicia sesión TMUX
-C-b %           # Divide la pantalla en 2 verticalmente
-C-b q 1         # Regresa a la primera mitad
-C-b "           # Divide el primer panel en 2 horizontalmente
+$ tmux          # Start TMUX session
+C-b %           # Split the screen in 2 vertically
+C-b q 1         # Go back to the first half
+C-b "           # Split the first panel in 2 horizontally
 ```
 
-Para lograr el layout desde el momento que se inicia la sesión TMUX la sintaxis es diferente ya que en ese momento no se tiene acceso a los atajos de teclado como son `C-b`y `M-x`, pero tenemos comandos de tmux, necesitamos inicialmente dos (`split-window` y `select-pane`). Como prueba inicial tendremos:
+To achieve the layout from the moment the TMUX session starts the syntax is different since at that moment you don't have access to the keyboard shortcuts like `C-b` and `M-x`, but we have tmux commands, we initially need two (`split-window` and `select-pane`). As an initial test we will have:
 
 ```bash
 $ tmux new-session \; \
 split-window -h
-
-# Resultado
+# Result
  ------------------------------
 |              |               |
 |      1       |       2       |
 |              |               |
- ------------------------------
+  ------------------------------
 ```
 
-El argumento `-h` indica que la ventana se dividirá en dos paneles de manera horizontal, el siguiente paso es dividir el Panel 1 en dos paneles verticalmente, por lo que complementando el comando es:
+The `-h` argument indicates that the window will be split into two panels horizontally, the next step is to split Panel 1 into two panels vertically, so complementing the command is:
 
 ```bash
 $ tmux new-session \; \
 split-window -h \; \
 split-window -v \;
 
-# Resultado
+# Result
  ------------------------------
 |              |       2       |
 |      1       |---------------|
 |              |       3       |
  ------------------------------
-```
+ ```
 
-El resultado obtenido hasta el momento no es exactamente lo que busco, pero hay que tomar en cuenta la manera como TMUX funciona, una vez que se divide la pantalla en paneles TMUX escoge el panel activo:
+ The result is not exactly the same as what I look for, but taking into account how TMUX works, once you split the screen, TMUX automatically chooses the active panel:
 
-- cuando se divide horizontalmente el panel activo es el de la derecha
-- cuando se divide verticalmente el panel activo es el de abajo.
+ - when you split the screen horizontally, the right panel is active.
+  - when you split the screen vertically, the bottom panel is active.
 
-En este caso dado que tenía dos paneles (1 y 2) separados horizontalmente, el siguiente `split-window` dividirá el panel 2. La solución es seleccionar manualmente el panel 1 antes de dividirlo verticalmente usando el comando `select-pane` como sigue:
+In this case, since that the screen initially has two panels (1 and 2) separated horizontally, the next `split-window` command will split the active panel 2. The solution to this is to select the panel 1 before splitting it using the command `select-pane`:
 
 ```bash
 $ tmux new-session \; \
 split-window -h \; \
-select-pane -t 1 \; \
+select-pane -t 0 \; \
 split-window -v \;
 
-# Resultado
+# Result
  ------------------------------
 |      1       |               |
  --------------|       3       |
@@ -88,17 +87,17 @@ split-window -v \;
  ------------------------------
 ```
 
-🎉🎉🎉 Listo!, el layout es como quiero...
+🎉🎉🎉 Done!, the layout is as I want it...
 
-## Inicio de tareas en cada panel
+## Starting tasks in each panel
 
-Ya que el layout está listo ahora queda iniciar las tareas en cada panel.
+Now that the layout is ready, the next step is to start the tasks in each panel.
 
-- Panel 1 para iniciar el metro bundler
-- Panel 2 para ejecutar `npx react-native run-{platform}`
-- Panel 3 para ejecutar el emulador
+- Panel 1: Start the metro-bundler
+- Panel 2: Run `npx react-native run-{platform}`
+- Panel 3: Start the emulator
 
-Para lograrlo se utiliza el comando `send-keys` seguido de `C-m` que es un parámetro que ejecuta el comando. Cada que se cree un panel iniciaremos su tarea.
+To achieve this, we can use the `send-keys` followed by `C-m` which is a parameter that executes the command. Each time we create a panel, we will start its task.
 
 ```bash
 $ tmux new-session \; \
@@ -110,11 +109,11 @@ split-window -v \; \
 send-keys 'npx react-native run-android' C-m \;
 ```
 
-🎉🎉🎉 Listo! añadiendo `send-keys` cuando se crea cada panel se inicia la tarea de cada uno. Ahora cada vez que quiero iniciar TMUX para trabajar en la app de react-native solo tengo que copiar y pegar ese ultimo comando en una terminal que este en el directorio raiz del proyecto.
+🎉🎉🎉 Done! adding the `send-keys` at the moment when each panel is created initiates the task for each onemptied. Now every time I want to start TMUX to work on my React Native project, I can simply run the command and have the layout and tasks set up automatically.
 
-## Mejoras
+## Improvements
 
-Hay un par de detalles que se pueden mejorar, la primera es que tengo que cambiar de directorio a la raiz del proyecto antes de copiar y pegar el comando de TMUX, eso se puede mejorar!. El comando `new-session` tiene disponible la bandera `-c` con la que se puede especificar el directorio en el cual se inicia la sesión de TMUX, aplicando esto tenemos:
+There are some improvements that I can make to this command, first is that I have to change the directory to the root of the project before copying and pasting the TMUX command, that can be improved!. The `new-session` command has the `-c` flag that allows you to specify the directory in which the TMUX session starts, applying this we have:
 
 ```bash
 $ tmux new-session -c /path/to/react-native-project \; \
@@ -126,9 +125,9 @@ split-window -v \; \
 send-keys 'npx react-native run-android' C-m \;
 ```
 
-Con el uso de `-c` se ahorra el paso de tener que estar en la raiz del proyecto antes de copiar y pegar el comando de TMUX. Desde cualquier directorio en el que esté la terminal la sesión de TMUX iniciará en el proyecto deseado.
+Using the `-c` flag saves the step of having to be in the root of the project before copying and pasting the TMUX command. From any directory in which the terminal is, the TMUX session will start in the desired project.
 
-La ultima mejora es darle un nombre a la sesión, la bandera `-n` de `new-session` hace justo esto:
+The last improvement is to give a name to the session, the `-n` flag of `new-session` does just that:
 
 ```bash
 $ tmux new-session -n tmux-rules -c /path/to/react-native-project \; \
@@ -140,13 +139,11 @@ split-window -v \; \
 send-keys 'npx react-native run-android' C-m \;
 ```
 
----
+**MISSION ACCOMPLISHED**
 
-**MISIÓN CUMPLIDA**
+This [gist](https://gist.github.com/fernando-mc/1e5b8a9c0d2f1e7b8a3c9e5b6f8a9c) has the final command with the improvements mentioned above. Now I can start my TMUX session with a single command and have everything set up for me to start working on my React Native project.
 
-Este [gist](https://gist.github.com/Veuge/4d460396bc459bf23093318f34a8186f) tiene el resultado final
-
-## Referencias
+## References
 
 - [TMUX Wiki](https://github.com/tmux/tmux/wiki/Getting-Started)
 - [TMUX Man Page](https://man7.org/linux/man-pages/man1/tmux.1.html)
