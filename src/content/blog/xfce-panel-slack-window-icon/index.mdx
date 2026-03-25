@@ -1,17 +1,17 @@
 ---
-title: "¿Cómo arreglar el icono de Slack en Debian - XFCE?"
+title: "How to fix the Slack icon in Debian - XFCE?"
 date: "2021-04-22"
 description: "Lorem ipsum"
 tags: ["linux"]
 ---
 
-Por un tiempo me ha estado molestando mucho que algunas aplicaciones ([Slack](https://slack.com/intl/en-bo/downloads/linux), [React-Native Debugger](https://github.com/jhen0409/react-native-debugger) y algunas otras instaladas con `.deb`) se vean sin icono en el panel de programas de XFCE.
+For a while I've been really annoyed that some applications ([Slack](https://slack.com/intl/en-bo/downloads/linux), [React-Native Debugger](https://github.com/jhen0409/react-native-debugger) and some others installed via `.deb`) appear without an icon in the XFCE task list panel.
 
-![Panel de XFCE con icono faltante de Slack](./window-panel.png "Panel de XFCE con icono faltante de Slack")
+![Panel de XFCE without the Slack icon](./window-panel.png "Panel de XFCE without the Slack icon")
 
-Al parecer es un bug de la aplicación en si o quizas algo con las aplicaciones Electrón en Debian, incluso pasa cuando se instala con SnapStore. De cualquier manera me molesta.
+It seems to be a bug in the app itself or maybe Electron apps on Debian, and it even happens when installed with SnapStore. Either way, it annoys me.
 
-Me pasé un buen rato investigando y el item [Window Buttons](https://docs.xfce.org/xfce/xfce4-panel/4.12/tasklist) obtiene su configuracion mediante los archivos `.desktop` de los diferentes programas. Buscando este archivo de Slack da como resultado:
+I spent a lot of time researching and learned that the [Window Buttons](https://docs.xfce.org/xfce/xfce4-panel/4.12/tasklist) item gets its configuration from programs’ `.desktop` files. Searching for Slack's file gives:
 
 ```bash
 $ sudo find / -iname "*slack*.desktop"
@@ -21,7 +21,7 @@ $ sudo find / -iname "*slack*.desktop"
 /usr/share/applications/slack.desktop
 ```
 
-El archivo en el directorio `$HOME/.config/autostart` es un symlink del de `/usr/share/applications`, entonces con arreglar este es suficiente. El contenido de este `.desktop` es:
+The file in `$HOME/.config/autostart` is a symlink to `/usr/share/applications`, so fixing that one is enough. Its content is:
 
 ```bash
 $ cat /usr/share/applications/slack.desktop
@@ -40,7 +40,7 @@ Categories=GNOME;GTK;Network;InstantMessaging;
 MimeType=x-scheme-handler/slack;
 ```
 
-La linea interesante aqui es `Icon=/usr/share/pixmaps/slack.png`, el archivo de imagen especificado es totalmente válido, existe y tiene permisos correctos.
+The interesting line is `Icon=/usr/share/pixmaps/slack.png;` the image exists and has correct permissions.
 
 ```bash
 $ ls -l /usr/share/pixmaps/slack.png
@@ -49,12 +49,12 @@ $ ls -l /usr/share/pixmaps/slack.png
 -rw-rw-r-- 1 root root 38884 Mar 15 20:12 /usr/share/pixmaps/slack.png
 ```
 
-Como parece que todo anda bien en la configuración pareciera que es un bug en aplicaciones de [ElectronJS](https://www.electronjs.org/), así que debe haber alguna otra manera de arreglar esto. Por suerte encontré [esta](https://www.reddit.com/r/xfce/comments/g3m4zk/icon_absent_for_snap_package_installed/) discusión, como dice el segundo comentario la solución o workaround es modificar el icono una vez que esté abierta la aplicación, para esto se siguen dos pasos
+Since config looks good, it seems like an [ElectronJS](https://www.electronjs.org/) bug, so there must be another fix. I found [this Reddit discussion](https://www.reddit.com/r/xfce/comments/g3m4zk/icon_absent_for_snap_package_installed/); the second comment says the workaround is to reset the icon after Slack opens, with two steps:
 
-1. Obtener el ID de la ventana de Slack utilizando `xwininfo`.
-2. Actualizar el icono de la ventana utilizando el ID con `xseticon`.
+1. Get Slack window ID using `xwininfo`.
+2. Set the window icon using `xseticon`.
 
-Siguiendo estos pasos manualmente el proceso es:
+Manual process:
 
 ```bash
 $ xwininfo -root -tree | sed -e 's/^ *//'| grep -E '0x.*Slack\s{1}\|' | awk '{print $1}'
@@ -65,15 +65,15 @@ $ xwininfo -root -tree | sed -e 's/^ *//'| grep -E '0x.*Slack\s{1}\|' | awk '{pr
 $ xseticon -id 0x4400005 /usr/share/pixmaps/slack.png
 ```
 
-Una vez se ejecuta el comando `xtseticon` el resultado es:
+After running `xtseticon` the result is:
 
 ![Panel de XFCE con icono válido de Slack](./window-panel-after.png "Panel de XFCE con icono válido de Slack")
 
-Obviamente como dice la discusión en Reddit, no es optimo seguir ese proceso manualmente cada que se abre Slack (o cualquier otra aplicación con este problema), entonces la manera de actualizar es modificando el parametro `Exec` en `/usr/share/applications/slack.desktop` para modificar el icono cuando hay la certeza que Slack ha iniciado.
+As Reddit says, doing this manually every Slack launch is suboptimal, so we tweak Exec in `/usr/share/applications/slack.desktop` to update icon automatically once Slack is known started.
 
-Para esto el repliqué el proceso descrito en [este comentario](https://www.reddit.com/r/xfce/comments/g3m4zk/icon_absent_for_snap_package_installed/fnvijl2?utm_source=share&utm_medium=web2x&context=3) dentro de un [script](https://github.com/Veuge/Configuration-files/blob/master/slack-init.sh), y finalmente ese script ejecutarlo en `slack.desktop`.
+I replicated the approach from [this comment](https://www.reddit.com/r/xfce/comments/g3m4zk/icon_absent_for_snap_package_installed/h9z9q9l/) in a script, and then call that [script](https://github.com/Veuge/Configuration-files/blob/master/slack-init.sh) from `slack.desktop`.
 
-Desglosando el script:
+Script breakdown:
 
 ```bash
 # Permite sobreescribir el .desktop
@@ -92,7 +92,7 @@ app_wid=$(xwininfo -root -tree |sed -e 's/^ *//'|grep -E '0x.*Slack\s{1}\|' | aw
 xseticon -id $app_wid $SLACK_ICON
 ```
 
-Y utilizando el script en el archivo `.desktop` en `Exec`.
+And finally, the modified `slack.desktop`:
 
 ```bash
 [Desktop Entry]
@@ -108,8 +108,8 @@ Categories=GNOME;GTK;Network;InstantMessaging;
 MimeType=x-scheme-handler/slack;
 ```
 
-## Conclusión
+## Conclusion
 
-- Esta solución es solo un workaround para restaurar el icono de Slack y otras aplicaciones en XFCE, idealmente se deberia determinar exactamente la razon por la cual el icono no está disponible.
-- El workaround funciona bien cuando se inicia manualmente Slack y cuando está entre la aplicacion que se auto-inician al iniciar sesión.
-- Se puede mejorar el script para hacerlo mas configurable para que sea extensible a otras aplicaciones con este error en el ícono. (Lo haré en algun momento...)
+- This is a workaround to restore Slack/other app icons in XFCE; the real cause should be diagnosed.
+- It works when Slack is started manually or via auto-start.
+- The script can be improved to make it configurable and reusable for other applications with this icon bug. (I'll do that someday).
