@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsisV } from "@fortawesome/free-solid-svg-icons";
 
 import Layout from "../components/layout/Layout";
+import Seo from "../components/seo/Seo";
 import Tag from "../components/tag/Tag";
 import CodeBlock from "../components/Code";
 import PostLink from "../components/PostLink";
@@ -51,11 +52,27 @@ const BlogPost = ({ data, children }) => {
 
 export default BlogPost;
 
+export const Head = (props) => {
+  const { frontmatter } = props.data.mdx;
+
+  return (
+    <Seo
+      {...props}
+      section={POSTS}
+      title={frontmatter.title}
+      description={frontmatter.description}
+      type="article"
+      publishedTime={frontmatter.isoDate}
+    />
+  );
+};
+
 export const query = graphql`
   query PostByIdAndLanguage($id: String!, $language: String!) {
     mdx(id: { eq: $id }) {
       frontmatter {
         date(formatString: "D MMMM YYYY", locale: $language)
+        isoDate: date(formatString: "YYYY-MM-DD")
         title
         description
       }

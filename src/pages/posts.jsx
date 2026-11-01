@@ -2,6 +2,7 @@ import React from "react";
 import { graphql } from "gatsby";
 
 import Layout from "../components/layout/Layout";
+import Seo from "../components/seo/Seo";
 import PostsPreviews from "../components/postPreview/PostPreviews";
 import { POSTS } from "../helpers";
 
@@ -14,6 +15,13 @@ const PostsPage = () => {
 };
 
 export default PostsPage;
+
+export const Head = (props) => (
+  <Seo
+    {...props}
+    section={POSTS}
+  />
+);
 
 export const query = graphql`
   query ($language: String!) {

@@ -11,6 +11,7 @@
   "not_found_message": "Esta página no existe, pero mis anotaciones sí.",
   "not_found_link": "cd ~/anotaciones",
   "short_description": "Apuntes de React, React Native, JS, y algunas cosas más.",
+  "seo_description": "Verónica Clavijo es desarrolladora de software y trabaja con JavaScript, React, React Native y Node.js desde 2017. Apuntes sobre desarrollo web y móvil, Linux y la línea de comandos.",
   "profile_photo_alt": "Retrato de Verónica Clavijo",
   "email_label": "Correo electrónico",
   "language_switcher_label": "Idioma",
