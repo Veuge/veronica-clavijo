@@ -53,6 +53,7 @@ export default function Info() {
           <a
             target="_blank"
             href={site.siteMetadata.links.twitter}
+            aria-label="Twitter"
             rel="noreferrer"
           >
             <FontAwesomeIcon icon={faTwitter} />
@@ -60,6 +61,7 @@ export default function Info() {
           <a
             target="_blank"
             href={site.siteMetadata.links.github}
+            aria-label="GitHub"
             rel="noreferrer"
           >
             <FontAwesomeIcon icon={faGithub} />
@@ -67,6 +69,7 @@ export default function Info() {
           <a
             target="_blank"
             href={site.siteMetadata.links.linkedin}
+            aria-label="LinkedIn"
             rel="noreferrer"
           >
             <FontAwesomeIcon icon={faLinkedin} />
@@ -74,6 +77,7 @@ export default function Info() {
           <a
             target="_blank"
             href={`mailto:${site.siteMetadata.links.email}`}
+            aria-label={t("email_label")}
             rel="noreferrer"
           >
             <FontAwesomeIcon icon={faEnvelope} />

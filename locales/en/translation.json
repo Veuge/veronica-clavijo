@@ -12,6 +12,8 @@
   "not_found_link": "cd ~/notes",
   "short_description": "Notes on React, React Native, JS, and some other things.",
   "profile_photo_alt": "Portrait of Verónica Clavijo",
+  "email_label": "Email",
+  "language_switcher_label": "Language",
   "about_me_p1": "Hi, my name is Verónica Clavijo (<0>Vero</0> or <1>Veuge</1>). I have been working as a developer since 2017, mostly on projects for clients in the United States and Europe. I work mainly with JavaScript, React and React Native, and I'm on my way to becoming a Fullstack developer.",
   "about_me_p2": "Welcome to my <0>digital garden</0>! Here I'll write about what I learn day to day, my personal projects and other miscellaneous things. Nothing here is final: everything is constantly evolving, and I'll keep updating the content as it does.",
   "about_me_p3": "If you want to chat, you can find me at:",
