@@ -91,8 +91,22 @@ const PresentationExtended = () => {
             <Trans i18nKey="code_editor" />
           </dt>
           <dd>
-            VS Code + <a href="https://github.com/daltonmenezes/aura-theme">Aura Theme</a> +{" "}
-            <a href="https://www.jetbrains.com/lp/mono/">JetBrains Mono</a>
+            VS Code +{" "}
+            <a
+              href="https://github.com/daltonmenezes/aura-theme"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Aura Theme
+            </a>{" "}
+            +{" "}
+            <a
+              href="https://www.jetbrains.com/lp/mono/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              JetBrains Mono
+            </a>
           </dd>
 
           <dt>
