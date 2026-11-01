@@ -7,11 +7,13 @@ import { faEllipsisV } from "@fortawesome/free-solid-svg-icons";
 import Layout from "../components/layout/Layout";
 import Tag from "../components/tag/Tag";
 import CodeBlock from "../components/Code";
+import PostLink from "../components/PostLink";
 import { POSTS } from "../helpers";
 import * as styles from "../styles/blogpost.module.scss";
 
 const components = {
   pre: CodeBlock,
+  a: PostLink,
 };
 
 const BlogPost = ({ data, children }) => {
