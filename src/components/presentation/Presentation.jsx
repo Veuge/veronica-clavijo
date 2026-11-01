@@ -43,7 +43,7 @@ const Presentation = () => {
       <div className={classNames.profilePicContainer}>
         <GatsbyImage
           image={getImage(file)}
-          alt={"Veronica Clavijo"}
+          alt={t("profile_photo_alt")}
           loading="lazy"
           className={classNames.avatar}
         />
@@ -79,6 +79,7 @@ const Presentation = () => {
           <a
             target="_blank"
             href={links.twitter}
+            aria-label="Twitter"
             rel="noreferrer"
           >
             <FontAwesomeIcon icon={faTwitter} />
@@ -86,6 +87,7 @@ const Presentation = () => {
           <a
             target="_blank"
             href={links.github}
+            aria-label="GitHub"
             rel="noreferrer"
           >
             <FontAwesomeIcon icon={faGithub} />
@@ -93,6 +95,7 @@ const Presentation = () => {
           <a
             target="_blank"
             href={links.linkedin}
+            aria-label="LinkedIn"
             rel="noreferrer"
           >
             <FontAwesomeIcon icon={faLinkedin} />
@@ -100,6 +103,7 @@ const Presentation = () => {
           <a
             target="_blank"
             href={`mailto:${links.email}`}
+            aria-label={t("email_label")}
             rel="noreferrer"
           >
             <FontAwesomeIcon icon={faEnvelope} />

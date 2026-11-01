@@ -53,7 +53,7 @@ export const query = graphql`
   query PostByIdAndLanguage($id: String!, $language: String!) {
     mdx(id: { eq: $id }) {
       frontmatter {
-        date(formatString: "D MMMM YYYY", locale: "es")
+        date(formatString: "D MMMM YYYY", locale: $language)
         title
         description
       }

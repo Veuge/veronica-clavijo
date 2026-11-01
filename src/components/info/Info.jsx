@@ -4,10 +4,12 @@ import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTwitter, faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import { useTranslation } from "gatsby-plugin-react-i18next";
 
 import * as styles from "./info.module.scss";
 
 export default function Info() {
+  const { t } = useTranslation();
   const { file, site } = useStaticQuery(graphql`
     query MainQuery {
       file(relativePath: { eq: "profile.jpeg" }) {
@@ -24,7 +26,6 @@ export default function Info() {
       site {
         siteMetadata {
           author
-          description
           links {
             email
             github
@@ -41,17 +42,18 @@ export default function Info() {
     <section className={styles.infoContainer}>
       <GatsbyImage
         image={getImage(file)}
-        alt={"hey"}
+        alt={t("profile_photo_alt")}
         loading="lazy"
         className={styles.avatar}
       />
       <div>
         <h1>{site.siteMetadata.author}</h1>
-        <h4>{site.siteMetadata.description}</h4>
+        <h4>{t("short_description")}</h4>
         <div className={styles.contactContainer}>
           <a
             target="_blank"
             href={site.siteMetadata.links.twitter}
+            aria-label="Twitter"
             rel="noreferrer"
           >
             <FontAwesomeIcon icon={faTwitter} />
@@ -59,6 +61,7 @@ export default function Info() {
           <a
             target="_blank"
             href={site.siteMetadata.links.github}
+            aria-label="GitHub"
             rel="noreferrer"
           >
             <FontAwesomeIcon icon={faGithub} />
@@ -66,6 +69,7 @@ export default function Info() {
           <a
             target="_blank"
             href={site.siteMetadata.links.linkedin}
+            aria-label="LinkedIn"
             rel="noreferrer"
           >
             <FontAwesomeIcon icon={faLinkedin} />
@@ -73,6 +77,7 @@ export default function Info() {
           <a
             target="_blank"
             href={`mailto:${site.siteMetadata.links.email}`}
+            aria-label={t("email_label")}
             rel="noreferrer"
           >
             <FontAwesomeIcon icon={faEnvelope} />

@@ -4,6 +4,7 @@ export const HOME = "home";
 export const POSTS = "posts";
 export const PROJECTS = "projects";
 export const WHOAMI = "whoAmI";
+export const NOT_FOUND = "notFound";
 
 export const MAIN_RED = "#fa5252";
 export const MAIN_GREEN = "#40c057";
@@ -19,20 +20,24 @@ export const PLAIN_BLACK = "#000000";
 
 export const sectionNameColors = {
   [HOME]: {
-    title: "Este es un Hotfix",
+    titleKey: "name",
     highlightColor: LAVANDA,
   },
   [POSTS]: {
-    title: "Anotaciones",
+    titleKey: "blog_section",
     highlightColor: MAIN_GREEN,
   },
   [PROJECTS]: {
-    title: "Proyectos",
+    titleKey: "projects_section",
     highlightColor: MAIN_RED,
   },
   [WHOAMI]: {
-    title: "$ whoami",
+    titleKey: "whoami_section",
     highlightColor: MAIN_BLUE,
+  },
+  [NOT_FOUND]: {
+    titleKey: "not_found_title",
+    highlightColor: MAIN_RED,
   },
 };
 

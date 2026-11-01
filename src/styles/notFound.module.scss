@@ -1,0 +1,50 @@
+.notFound {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  margin: auto;
+  padding-block: 4rem;
+  text-align: center;
+  line-height: 1.8;
+
+  p {
+    font-size: 1.01rem;
+  }
+
+  .terminal {
+    font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    max-width: 100%;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    background: var(--plainBlack);
+    box-shadow: 1rem 1rem 1rem var(--plainBlack);
+    text-align: left;
+    overflow-wrap: anywhere;
+  }
+
+  .command {
+    margin: 0;
+    font-family: inherit;
+    font-size: 1.1rem;
+    font-weight: normal;
+    color: var(--white);
+  }
+
+  .prompt {
+    color: var(--mainGreen);
+  }
+
+  .error {
+    color: var(--mainRed);
+  }
+
+  .link {
+    font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    color: var(--blue);
+    opacity: 0.8;
+    font-weight: bold;
+    text-decoration: underline;
+    text-decoration-color: var(--blue);
+  }
+}

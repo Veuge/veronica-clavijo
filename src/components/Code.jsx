@@ -1,16 +1,19 @@
 import React from "react";
-import Highlight, { defaultProps } from "prism-react-renderer";
-import theme from "prism-react-renderer/themes/oceanicNext";
+import { Highlight, themes } from "prism-react-renderer";
+
+// prism-react-renderer v2 doesn't bundle bash or java. Order matters: prismSetup must run first.
+import "./prismSetup";
+import "prismjs/components/prism-bash";
+import "prismjs/components/prism-java";
 
 const CodeBlock = (props) => {
   const className = props.children.props.className || "";
   const matches = className.match(/language-(?<lang>.*)/);
   return (
     <Highlight
-      {...defaultProps}
       code={props.children.props.children.trim()}
       language={matches && matches.groups && matches.groups.lang ? matches.groups.lang : ""}
-      theme={theme}
+      theme={themes.oceanicNext}
     >
       {({ className, style, tokens, getLineProps, getTokenProps }) => (
         <pre
@@ -20,12 +23,12 @@ const CodeBlock = (props) => {
           {tokens.map((line, i) => (
             <div
               key={i}
-              {...getLineProps({ line, key: i })}
+              {...getLineProps({ line })}
             >
               {line.map((token, key) => (
                 <span
                   key={key}
-                  {...getTokenProps({ token, key })}
+                  {...getTokenProps({ token })}
                 />
               ))}
             </div>
