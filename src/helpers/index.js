@@ -4,6 +4,7 @@ export const HOME = "home";
 export const POSTS = "posts";
 export const PROJECTS = "projects";
 export const WHOAMI = "whoAmI";
+export const NOT_FOUND = "notFound";
 
 export const MAIN_RED = "#fa5252";
 export const MAIN_GREEN = "#40c057";
@@ -33,6 +34,10 @@ export const sectionNameColors = {
   [WHOAMI]: {
     titleKey: "whoami_section",
     highlightColor: MAIN_BLUE,
+  },
+  [NOT_FOUND]: {
+    titleKey: "not_found_title",
+    highlightColor: MAIN_RED,
   },
 };
 

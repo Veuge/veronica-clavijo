@@ -4,7 +4,7 @@ import { useTranslation } from "gatsby-plugin-react-i18next";
 
 import Navbar from "../navbar/Navbar";
 import Info from "../info/Info";
-import { HOME, sectionNameColors, WHOAMI } from "../../helpers";
+import { HOME, NOT_FOUND, sectionNameColors, WHOAMI } from "../../helpers";
 import * as classnames from "./layout.module.scss";
 
 const Layout = ({ section, children, style }) => {
@@ -23,7 +23,7 @@ const Layout = ({ section, children, style }) => {
         >
           <article>{children}</article>
         </div>
-        {![HOME, WHOAMI].includes(section) && (
+        {![HOME, WHOAMI, NOT_FOUND].includes(section) && (
           <footer
             style={{ display: "flex", justifyContent: "center", width: "70%", margin: "auto" }}
           >
@@ -36,7 +36,7 @@ const Layout = ({ section, children, style }) => {
 };
 
 Layout.propTypes = {
-  section: PropTypes.oneOf(["home", "posts", "projects", "whoAmI"]).isRequired,
+  section: PropTypes.oneOf(["home", "posts", "projects", "whoAmI", "notFound"]).isRequired,
 };
 
 export default Layout;

@@ -1,43 +1,47 @@
 import React from "react";
-import { Link } from "gatsby";
+import { graphql } from "gatsby";
+import { Link, useTranslation } from "gatsby-plugin-react-i18next";
 
-// styles
-const pageStyles = {
-  color: "#232129",
-  padding: "96px",
-  fontFamily: "-apple-system, Roboto, sans-serif, serif",
-};
+import Layout from "../components/layout/Layout";
+import { NOT_FOUND } from "../helpers";
+import * as styles from "../styles/notFound.module.scss";
 
-const headingStyles = {
-  marginTop: 0,
-  marginBottom: 64,
-  maxWidth: 320,
-};
-
-const paragraphStyles = {
-  marginBottom: 48,
-};
-
-// markup
 const NotFoundPage = () => {
+  const { t } = useTranslation();
+
   return (
-    <main style={pageStyles}>
-      <title>Página no encontrada</title>
-      <h1 style={headingStyles}>Error :: No pude encontrar la página</h1>
-      <p style={paragraphStyles}>
-        Lo siento{" "}
-        <span
-          role="img"
-          aria-label="Pensive emoji"
+    <Layout section={NOT_FOUND}>
+      <section className={styles.notFound}>
+        <div className={styles.terminal}>
+          <h1 className={styles.command}>
+            <span className={styles.prompt}>$</span> {t("not_found_command")}
+          </h1>
+          <p className={styles.error}>{t("not_found_error")}</p>
+        </div>
+        <p>{t("not_found_message")}</p>
+        <Link
+          to="/posts/"
+          className={styles.link}
         >
-          😔
-        </span>{" "}
-        no pude encontrar lo que estás buscando.
-        <br />
-        <Link to="/">Volver a la página principal</Link>.
-      </p>
-    </main>
+          {t("not_found_link")}
+        </Link>
+      </section>
+    </Layout>
   );
 };
 
 export default NotFoundPage;
+
+export const query = graphql`
+  query ($language: String!) {
+    locales: allLocale(filter: { language: { eq: $language } }) {
+      edges {
+        node {
+          ns
+          data
+          language
+        }
+      }
+    }
+  }
+`;
