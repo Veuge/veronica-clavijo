@@ -84,15 +84,6 @@ const PresentationExtended = () => {
                 </a>,
               ]}
             />
-            Guake + tmux (con{" "}
-            <a
-              href={"https://github.com/Veuge/Configuration-files/blob/master/tmux.conf"}
-              target="_blank"
-              rel="noreferrer"
-            >
-              esta
-            </a>{" "}
-            configuración)
           </dd>
 
           <dt>
