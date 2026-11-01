@@ -13,6 +13,7 @@
   "short_description": "Notes on React, React Native, JS, and some other things.",
   "seo_description": "Verónica Clavijo is a software developer working with JavaScript, React, React Native and Node.js since 2017. Notes on web and mobile development, Linux and the command line.",
   "profile_photo_alt": "Portrait of Verónica Clavijo",
+  "og_image_alt": "This is a Hotfix, written by Verónica Clavijo",
   "email_label": "Email",
   "language_switcher_label": "Language",
   "about_me_p1": "Hi, my name is Verónica Clavijo (<0>Vero</0> or <1>Veuge</1>). I have been working as a developer since 2017, mostly on projects for clients in the United States and Europe. I work mainly with JavaScript, React and React Native, and I'm on my way to becoming a Fullstack developer.",
