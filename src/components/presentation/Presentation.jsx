@@ -43,7 +43,7 @@ const Presentation = () => {
       <div className={classNames.profilePicContainer}>
         <GatsbyImage
           image={getImage(file)}
-          alt={"Veronica Clavijo"}
+          alt={t("profile_photo_alt")}
           loading="lazy"
           className={classNames.avatar}
         />

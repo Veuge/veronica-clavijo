@@ -42,7 +42,7 @@ export default function Info() {
     <section className={styles.infoContainer}>
       <GatsbyImage
         image={getImage(file)}
-        alt={"hey"}
+        alt={t("profile_photo_alt")}
         loading="lazy"
         className={styles.avatar}
       />

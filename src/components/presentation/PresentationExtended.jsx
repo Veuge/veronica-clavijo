@@ -1,11 +1,12 @@
 import React from "react";
 import { graphql, useStaticQuery } from "gatsby";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
-import { Trans } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 
 import * as classNames from "./presentation.module.scss";
 
 const PresentationExtended = () => {
+  const { t } = useTranslation();
   const { file } = useStaticQuery(graphql`
     query PresentationExtendedQuery {
       file(relativePath: { eq: "profile3.jpg" }) {
@@ -28,7 +29,7 @@ const PresentationExtended = () => {
     >
       <GatsbyImage
         image={getImage(file)}
-        alt={"hey"}
+        alt={t("profile_photo_alt")}
         loading="lazy"
         className={classNames.profile}
       />
