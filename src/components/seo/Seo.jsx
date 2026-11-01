@@ -32,7 +32,7 @@ const Seo = ({
   publishedTime,
   noindex = false,
 }) => {
-  const { site, file } = useStaticQuery(graphql`
+  const { site, cardEn, cardEs } = useStaticQuery(graphql`
     query SeoQuery {
       site {
         siteMetadata {
@@ -41,9 +41,18 @@ const Seo = ({
           twitterUsername
         }
       }
-      file(relativePath: { eq: "profile3.jpg" }) {
+      cardEn: file(relativePath: { eq: "og-card-en.png" }) {
         childImageSharp {
-          resize(width: 600, height: 600, cropFocus: CENTER) {
+          original {
+            src
+            width
+            height
+          }
+        }
+      }
+      cardEs: file(relativePath: { eq: "og-card-es.png" }) {
+        childImageSharp {
+          original {
             src
             width
             height
@@ -64,7 +73,7 @@ const Seo = ({
     : [author, sectionTitle].filter(Boolean).join(" | ");
   const metaDescription = description || t.seo_description || t.short_description;
   const url = `${siteUrl}${location.pathname}`;
-  const image = file?.childImageSharp?.resize;
+  const image = (language === "en" ? cardEn : cardEs)?.childImageSharp?.original;
   const imageUrl = image ? `${siteUrl}${image.src}` : undefined;
 
   return (
@@ -156,7 +165,7 @@ const Seo = ({
           />
           <meta
             property="og:image:alt"
-            content={t.profile_photo_alt}
+            content={t.og_image_alt}
           />
         </>
       )}
@@ -169,7 +178,7 @@ const Seo = ({
 
       <meta
         name="twitter:card"
-        content="summary"
+        content="summary_large_image"
       />
       <meta
         name="twitter:site"
@@ -195,7 +204,7 @@ const Seo = ({
           />
           <meta
             name="twitter:image:alt"
-            content={t.profile_photo_alt}
+            content={t.og_image_alt}
           />
         </>
       )}
