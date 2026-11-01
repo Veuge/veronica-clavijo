@@ -2,6 +2,8 @@ module.exports = {
   siteMetadata: {
     title: "veronica-clavijo",
     author: "Verónica Clavijo",
+    siteUrl: "https://veuge.github.io",
+    twitterUsername: "@Veuge_C",
     description: "Apuntes de React, ReactNative, JS y algunas cosas mas.",
     links: {
       twitter: "https://twitter.com/Veuge_C",

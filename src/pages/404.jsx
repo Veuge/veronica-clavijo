@@ -3,6 +3,7 @@ import { graphql } from "gatsby";
 import { Link, useTranslation } from "gatsby-plugin-react-i18next";
 
 import Layout from "../components/layout/Layout";
+import Seo from "../components/seo/Seo";
 import { NOT_FOUND } from "../helpers";
 import * as styles from "../styles/notFound.module.scss";
 
@@ -31,6 +32,14 @@ const NotFoundPage = () => {
 };
 
 export default NotFoundPage;
+
+export const Head = (props) => (
+  <Seo
+    {...props}
+    section={NOT_FOUND}
+    noindex
+  />
+);
 
 export const query = graphql`
   query ($language: String!) {

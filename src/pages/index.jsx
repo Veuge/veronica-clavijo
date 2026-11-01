@@ -4,6 +4,7 @@ import "@fontsource/ibm-plex-sans";
 import { graphql } from "gatsby";
 
 import Layout from "../components/layout/Layout";
+import Seo from "../components/seo/Seo";
 import Presentation from "../components/presentation/Presentation";
 import { HOME } from "../helpers";
 
@@ -16,6 +17,13 @@ const IndexPage = () => {
 };
 
 export default IndexPage;
+
+export const Head = (props) => (
+  <Seo
+    {...props}
+    section={HOME}
+  />
+);
 
 export const query = graphql`
   query ($language: String!) {

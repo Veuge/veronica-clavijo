@@ -11,6 +11,7 @@
   "not_found_message": "This page doesn't exist, but my notes do.",
   "not_found_link": "cd ~/notes",
   "short_description": "Notes on React, React Native, JS, and some other things.",
+  "seo_description": "Verónica Clavijo is a software developer working with JavaScript, React, React Native and Node.js since 2017. Notes on web and mobile development, Linux and the command line.",
   "profile_photo_alt": "Portrait of Verónica Clavijo",
   "email_label": "Email",
   "language_switcher_label": "Language",
