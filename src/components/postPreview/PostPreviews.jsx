@@ -25,7 +25,8 @@ export default function PostPreview() {
             }
             frontmatter {
               title
-              date(formatString: "D MMMM YYYY", locale: "es")
+              dateEn: date(formatString: "D MMMM YYYY", locale: "en")
+              dateEs: date(formatString: "D MMMM YYYY", locale: "es")
               description
             }
           }
@@ -56,7 +57,8 @@ export default function PostPreview() {
             <h3>{node.frontmatter.description}</h3>
             <div className={styles.footerContainer}>
               <span>
-                {t("posted_on")} {node.frontmatter.date}
+                {t("posted_on")}{" "}
+                {language === "es" ? node.frontmatter.dateEs : node.frontmatter.dateEn}
               </span>
               {!!node.frontmatter.tags && (
                 <>
