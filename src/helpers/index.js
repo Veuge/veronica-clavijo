@@ -19,19 +19,19 @@ export const PLAIN_BLACK = "#000000";
 
 export const sectionNameColors = {
   [HOME]: {
-    title: "Este es un Hotfix",
+    titleKey: "name",
     highlightColor: LAVANDA,
   },
   [POSTS]: {
-    title: "Anotaciones",
+    titleKey: "blog_section",
     highlightColor: MAIN_GREEN,
   },
   [PROJECTS]: {
-    title: "Proyectos",
+    titleKey: "projects_section",
     highlightColor: MAIN_RED,
   },
   [WHOAMI]: {
-    title: "$ whoami",
+    titleKey: "whoami_section",
     highlightColor: MAIN_BLUE,
   },
 };

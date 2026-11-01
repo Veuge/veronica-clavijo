@@ -4,10 +4,12 @@ import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTwitter, faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import { useTranslation } from "gatsby-plugin-react-i18next";
 
 import * as styles from "./info.module.scss";
 
 export default function Info() {
+  const { t } = useTranslation();
   const { file, site } = useStaticQuery(graphql`
     query MainQuery {
       file(relativePath: { eq: "profile.jpeg" }) {
@@ -24,7 +26,6 @@ export default function Info() {
       site {
         siteMetadata {
           author
-          description
           links {
             email
             github
@@ -47,7 +48,7 @@ export default function Info() {
       />
       <div>
         <h1>{site.siteMetadata.author}</h1>
-        <h4>{site.siteMetadata.description}</h4>
+        <h4>{t("short_description")}</h4>
         <div className={styles.contactContainer}>
           <a
             target="_blank"

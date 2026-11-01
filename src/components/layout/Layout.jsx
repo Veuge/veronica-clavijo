@@ -1,5 +1,6 @@
 import React, { Fragment } from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "gatsby-plugin-react-i18next";
 
 import Navbar from "../navbar/Navbar";
 import Info from "../info/Info";
@@ -7,9 +8,11 @@ import { HOME, sectionNameColors, WHOAMI } from "../../helpers";
 import * as classnames from "./layout.module.scss";
 
 const Layout = ({ section, children, style }) => {
+  const { t } = useTranslation();
+
   return (
     <Fragment>
-      <title>Verónica Clavijo | {sectionNameColors[section].title}</title>
+      <title>{`Verónica Clavijo | ${t(sectionNameColors[section].titleKey)}`}</title>
       <main className={classnames.main}>
         <header>
           <Navbar />
