@@ -14,11 +14,21 @@
 
     .metaInfoContainer {
       display: flex;
+      flex-wrap: wrap;
       align-items: center;
+      row-gap: 8px;
       margin-block: 1rem;
       span {
         color: var(--white);
         font-size: 0.8em;
+      }
+
+      // Tags are links: keep the tag look instead of the post body's link style below
+      a {
+        color: var(--white);
+        opacity: 1;
+        font-weight: normal;
+        text-decoration: none;
       }
     }
 

@@ -6,10 +6,10 @@ import Seo from "../components/seo/Seo";
 import PostsPreviews from "../components/postPreview/PostPreviews";
 import { POSTS } from "../helpers";
 
-const PostsPage = () => {
+const PostsPage = ({ location }) => {
   return (
     <Layout section={POSTS}>
-      <PostsPreviews />
+      <PostsPreviews location={location} />
     </Layout>
   );
 };

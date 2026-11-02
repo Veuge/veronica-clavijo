@@ -3,6 +3,8 @@
   "description": "Escrito por",
   "blog_section": "Anotaciones",
   "posted_on": "Publicado el",
+  "filter_by_tag": "Filtrar por etiqueta",
+  "all_tags": "Todas",
   "projects_section": "Proyectos",
   "whoami_section": "$ whoami",
   "not_found_title": "Página no encontrada",
