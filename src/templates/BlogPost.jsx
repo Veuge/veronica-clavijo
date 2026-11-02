@@ -28,7 +28,7 @@ const BlogPost = ({ data, children }) => {
           <h1 className={styles.postTitle}>{frontmatter.title}</h1>
           <div className={styles.metaInfoContainer}>
             <span>{frontmatter.date}</span>
-            {!!frontmatter.tags && (
+            {frontmatter.tags?.length > 0 && (
               <>
                 <FontAwesomeIcon
                   icon={faEllipsisV}
@@ -38,6 +38,7 @@ const BlogPost = ({ data, children }) => {
                   <Tag
                     key={tag}
                     tag={tag}
+                    linked
                   />
                 ))}
               </>
@@ -75,6 +76,7 @@ export const query = graphql`
         isoDate: date(formatString: "YYYY-MM-DD")
         title
         description
+        tags
       }
     }
     locales: allLocale(filter: { language: { eq: $language } }) {

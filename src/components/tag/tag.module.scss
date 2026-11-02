@@ -1,9 +1,33 @@
 .tag {
-  display: inline;
+  display: inline-block;
   padding: 4px 8px;
   border: 1px solid var(--mainGreen);
   color: var(--white);
   font-size: 12px;
+  line-height: 1.2;
   border-radius: 5px;
   margin: 0 5px;
+  white-space: nowrap;
+}
+
+.link {
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+
+  &:hover,
+  &:focus-visible {
+    background-color: rgba(64, 192, 87, 0.2);
+  }
+}
+
+.active {
+  background-color: var(--mainGreen);
+  color: var(--plainBlack);
+  font-weight: bold;
+
+  &:hover,
+  &:focus-visible {
+    background-color: var(--mainGreen);
+  }
 }

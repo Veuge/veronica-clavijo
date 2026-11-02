@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import Navbar from "../navbar/Navbar";
 import Info from "../info/Info";
-import { HOME, NOT_FOUND, WHOAMI } from "../../helpers";
+import { composeClasses, HOME, NOT_FOUND, POSTS, WHOAMI } from "../../helpers";
 import * as classnames from "./layout.module.scss";
 
 const Layout = ({ section, children, style }) => {
@@ -14,14 +14,19 @@ const Layout = ({ section, children, style }) => {
           <Navbar />
         </header>
         <div
-          className={classnames.body}
+          className={composeClasses(classnames.body, section === POSTS && classnames.alignTop)}
           style={style || {}}
         >
           <article>{children}</article>
         </div>
         {![HOME, WHOAMI, NOT_FOUND].includes(section) && (
           <footer
-            style={{ display: "flex", justifyContent: "center", width: "70%", margin: "auto" }}
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              width: "70%",
+              margin: "2rem auto 1rem",
+            }}
           >
             <Info />
           </footer>

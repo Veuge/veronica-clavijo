@@ -36,6 +36,12 @@
       flex: 1;
     }
   }
+
+  // Notes (post list and posts): start at the top instead of vertically centering
+  .alignTop {
+    justify-content: flex-start;
+    padding-block-start: 2rem;
+  }
 }
 
 @supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {

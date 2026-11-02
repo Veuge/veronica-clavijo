@@ -1,4 +1,4 @@
-export const composeClasses = (...args) => args.join(" ");
+export const composeClasses = (...args) => args.filter(Boolean).join(" ");
 
 export const HOME = "home";
 export const POSTS = "posts";
