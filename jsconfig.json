@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "checkJs": false
+  },
+  "typeAcquisition": {
+    "enable": false
+  },
+  "include": ["src"]
+}

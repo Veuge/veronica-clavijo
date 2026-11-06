@@ -1,6 +1,5 @@
 import React from "react";
-import { Link } from "gatsby";
-import { useTranslation } from "gatsby-plugin-react-i18next";
+import { Link, useTranslation } from "gatsby-plugin-react-i18next";
 
 import * as classnames from "./header.module.scss";
 
