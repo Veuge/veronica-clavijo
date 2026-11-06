@@ -1,6 +1,5 @@
 import React from "react";
-import { Link } from "gatsby";
-import { useTranslation } from "gatsby-plugin-react-i18next";
+import { Link, useTranslation } from "gatsby-plugin-react-i18next";
 
 import { composeClasses } from "../../helpers/index";
 import Header from "./Header";
