@@ -9,6 +9,7 @@ import Seo from "../components/seo/Seo";
 import Tag from "../components/tag/Tag";
 import CodeBlock from "../components/Code";
 import PostLink from "../components/PostLink";
+import TableOfContents from "../components/tableOfContents/TableOfContents";
 import { POSTS } from "../helpers";
 import * as styles from "../styles/blogpost.module.scss";
 
@@ -19,7 +20,7 @@ const components = {
 
 const BlogPost = ({ data, children }) => {
   const {
-    mdx: { frontmatter },
+    mdx: { frontmatter, tableOfContents },
   } = data;
   return (
     <Layout section={POSTS}>
@@ -44,6 +45,7 @@ const BlogPost = ({ data, children }) => {
               </>
             )}
           </div>
+          <TableOfContents toc={tableOfContents} />
           <MDXProvider components={components}>{children}</MDXProvider>
         </div>
       </article>
@@ -71,6 +73,7 @@ export const Head = (props) => {
 export const query = graphql`
   query PostByIdAndLanguage($id: String!, $language: String!) {
     mdx(id: { eq: $id }) {
+      tableOfContents(maxDepth: 3)
       frontmatter {
         date(formatString: "D MMMM YYYY", locale: $language)
         isoDate: date(formatString: "YYYY-MM-DD")

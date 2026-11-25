@@ -1,0 +1,158 @@
+@use "../../styles/variables.scss";
+
+// Selectors are nested under .inline/.rail so they win over the generic
+// `li` / `a` styles of the post body (blogpost.module.scss).
+.inline,
+.rail {
+  .list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .list .item {
+    margin: 0;
+    list-style: none;
+
+    &::marker {
+      content: none;
+    }
+
+    a {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding-block: 4px;
+      padding-inline-start: calc(var(--depth, 0) * 14px);
+      color: var(--lightGray);
+      opacity: 1;
+      font-weight: normal;
+      font-size: 0.85rem;
+      line-height: 1.3em;
+      text-decoration: none;
+
+      &:hover,
+      &:focus-visible {
+        color: var(--white);
+      }
+    }
+
+    .title {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    &.active a {
+      color: var(--mainGreen);
+    }
+  }
+}
+
+// Small screens: collapsible block below the post meta info.
+.inline {
+  margin-block: 1rem;
+  padding: 8px 12px;
+  border-left: 1px solid var(--mainGreen);
+  background: rgba(0, 0, 0, 0.15);
+
+  summary {
+    cursor: pointer;
+    color: var(--white);
+    font-weight: 600;
+
+    &::marker {
+      color: var(--mainGreen);
+    }
+  }
+
+  nav {
+    margin-block-start: 8px;
+  }
+
+  .dash {
+    display: none;
+  }
+}
+
+// Large screens: fixed rail of dashes that expands into the full list.
+.rail {
+  display: none;
+}
+
+@media (min-width: variables.$laptop) {
+  .inline {
+    display: none;
+  }
+
+  .rail {
+    display: block;
+    position: fixed;
+    top: 50%;
+    right: 16px;
+    transform: translateY(-50%);
+    z-index: 5;
+    max-height: 70vh;
+    max-width: 24px;
+    overflow: hidden;
+    padding: 12px 8px;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    transition: max-width 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+
+    .list .item a {
+      padding-inline-start: 0;
+    }
+
+    // Dash length shrinks with heading depth, like a minimap of the post.
+    .dash {
+      flex-shrink: 0;
+      width: calc(16px - var(--depth, 0) * 4px);
+      height: 2px;
+      border-radius: 1px;
+      background-color: var(--lightGray);
+      opacity: 0.5;
+      transition: opacity 0.2s ease;
+    }
+
+    .list .item.active .dash {
+      width: 16px;
+      background-color: var(--mainGreen);
+      opacity: 1;
+    }
+
+    .title {
+      opacity: 0;
+      transition: opacity 0.15s ease;
+    }
+
+    &:hover,
+    &:focus-within {
+      max-width: 320px;
+      overflow-y: auto;
+      background-color: var(--gray);
+      border-color: var(--otherGray);
+      box-shadow: 0 0 0 8px rgba(0, 0, 0, 0.2);
+
+      .title {
+        opacity: 1;
+      }
+
+      .list .item a {
+        padding-inline-start: calc(var(--depth, 0) * 14px);
+      }
+
+      .dash {
+        width: 6px;
+      }
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rail,
+  .rail .dash,
+  .rail .title {
+    transition: none;
+  }
+}
