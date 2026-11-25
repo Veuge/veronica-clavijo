@@ -39,6 +39,16 @@ module.exports = {
         extensions: [`.md`, `.mdx`],
         gatsbyRemarkPlugins: [
           {
+            // Adds an id + hover "#" link to every heading, so sections can be linked to.
+            // Slugs match the ones used by the Mdx `tableOfContents` field (both use github-slugger).
+            resolve: `gatsby-remark-autolink-headers`,
+            options: {
+              className: `heading-anchor`,
+              icon: `<span aria-hidden="true">#</span>`,
+              isIconAfterHeader: true,
+            },
+          },
+          {
             resolve: `gatsby-remark-images`,
             options: {
               maxWidth: 1200,
