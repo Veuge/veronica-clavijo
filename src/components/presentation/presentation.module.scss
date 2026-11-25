@@ -45,69 +45,37 @@
       text-decoration-color: var(--blue);
     }
 
-    dt,
-    dd {
-      color: white;
-    }
-
-    dt {
-      font-weight: bold;
-      text-align: right;
-      clear: left;
-      float: left;
-    }
-
-    dd {
-      padding: 0.5em 0;
-    }
-
+    // Grid keeps each term on the same row as its description, even when
+    // either side wraps onto several lines (floats used to drift out of sync).
     dl {
+      display: grid;
+      grid-template-columns: 1fr;
       width: 100%;
-      &:after {
-        content: "";
-        display: table;
-        clear: both;
-      }
+      margin: 0;
     }
 
-    dt,
+    // Category label: small caps-style, in the whoami accent color.
+    dt {
+      color: var(--white);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      line-height: 1.4;
+      padding-top: 0.9em;
+      border-top: 1px solid var(--otherGray);
+    }
+
+    dt:first-of-type {
+      border-top: none;
+    }
+
+    // Value: regular body text.
     dd {
-      display: inline-block;
-      width: 30%;
-    }
-
-    dd {
-      width: 70%;
-      padding-left: 1em;
-      clear: right;
-    }
-
-    dd + dd {
-      float: right;
-      clear: both;
-    }
-
-    dt:first-child {
-      padding-top: 0.5em;
-    }
-
-    dd + dt {
-      clear: both;
-      padding-top: 0.5em;
-    }
-
-    dt + dt {
-      width: 100%;
-      float: none;
-      padding: 0 70% 0 0;
-    }
-
-    dt + dt + dd {
-      margin-top: -2em;
-    }
-
-    dt + dt + dd + dt {
-      margin-top: 2em;
+      color: var(--white);
+      margin: 0;
+      padding-block: 0.2em 0.9em;
+      overflow-wrap: anywhere;
     }
   }
 
@@ -137,6 +105,29 @@
 
     .content {
       max-width: 60%;
+
+      // Wide enough for two columns: term on the left, description on the right.
+      dl {
+        grid-template-columns: minmax(0, 32%) minmax(0, 1fr);
+        column-gap: 1.5em;
+      }
+
+      // Each row gets a full-width divider: both cells share the top border.
+      dt,
+      dd {
+        padding-block: 0.8em;
+        border-top: 1px solid var(--otherGray);
+      }
+
+      dt {
+        // Nudge the smaller label onto the value's text baseline.
+        padding-top: calc(0.8em + 0.5rem);
+      }
+
+      dt:first-of-type,
+      dt:first-of-type + dd {
+        border-top: none;
+      }
     }
   }
 }
