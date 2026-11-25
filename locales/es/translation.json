@@ -29,5 +29,6 @@
   "terminal": "Guake + tmux con <0>esta</0> configuración",
   "code_editor": "Editor de Código",
   "browser": "Navegador",
-  "notes": "Notas y Base de Conocimientos"
+  "notes": "Notas y Base de Conocimientos",
+  "table_of_contents": "En esta página"
 }
