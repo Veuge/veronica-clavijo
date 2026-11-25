@@ -47,6 +47,26 @@
     h6 {
       @include shadowedText;
       margin-block: 1.2em;
+      // Keep linked headings clear of the sticky navbar when jumped to.
+      scroll-margin-top: 5rem;
+
+      // "#" link added by gatsby-remark-autolink-headers, shown on hover/focus.
+      :global(.heading-anchor) {
+        margin-inline-start: 0.4em;
+        color: var(--mainGreen);
+        opacity: 0;
+        font-weight: normal;
+        text-decoration: none;
+        transition: opacity 0.15s ease;
+
+        &:focus-visible {
+          opacity: 1;
+        }
+      }
+
+      &:hover :global(.heading-anchor) {
+        opacity: 1;
+      }
     }
 
     a {
