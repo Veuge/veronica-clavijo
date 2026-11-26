@@ -1,0 +1,118 @@
+// Added to the post body: hint that images can be enlarged.
+.zoomable {
+  :global(.gatsby-resp-image-link),
+  img {
+    cursor: zoom-in;
+  }
+
+  // Images inside regular links keep the link cursor.
+  a:not(:global(.gatsby-resp-image-link)) img {
+    cursor: pointer;
+  }
+}
+
+.lightbox {
+  // Native <dialog> shown with showModal(): fills the viewport on the top layer.
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: none;
+  // The dialog spans the whole viewport, so it doubles as the overlay. Opaque
+  // site background (like Medium) so transparent PNGs don't show the post text
+  // through them.
+  background: var(--gray);
+  cursor: zoom-out;
+
+  &[open] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.2s ease;
+  }
+
+  &::backdrop {
+    background: transparent;
+  }
+}
+
+.figure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin: 0;
+  padding: 16px;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.image {
+  display: block;
+  max-width: 95vw;
+  max-height: 85vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 4px;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.6);
+  animation: zoomIn 0.2s ease;
+}
+
+.caption {
+  color: var(--lightGray);
+  font-size: 0.9rem;
+  text-align: center;
+  max-width: 80ch;
+}
+
+.closeButton {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--mainGreen);
+  background: rgba(42, 43, 46, 0.8);
+  color: var(--white);
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+
+  &:hover,
+  &:focus-visible {
+    background: var(--mainGreen);
+    color: var(--plainBlack);
+    outline: none;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes zoomIn {
+  from {
+    transform: scale(0.96);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lightbox[open],
+  .image {
+    animation: none;
+  }
+}
