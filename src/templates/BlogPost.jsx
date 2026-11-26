@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { graphql } from "gatsby";
 import { MDXProvider } from "@mdx-js/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -10,6 +10,7 @@ import Tag from "../components/tag/Tag";
 import CodeBlock from "../components/Code";
 import PostLink from "../components/PostLink";
 import TableOfContents from "../components/tableOfContents/TableOfContents";
+import ImageLightbox from "../components/imageLightbox/ImageLightbox";
 import { POSTS } from "../helpers";
 import * as styles from "../styles/blogpost.module.scss";
 
@@ -22,10 +23,16 @@ const BlogPost = ({ data, children }) => {
   const {
     mdx: { frontmatter, tableOfContents },
   } = data;
+  // The lightbox listens to image clicks inside the post body.
+  const postRef = useRef(null);
+
   return (
     <Layout section={POSTS}>
       <article className={styles.blogPostContainer}>
-        <div className={styles.post}>
+        <div
+          className={styles.post}
+          ref={postRef}
+        >
           <h1 className={styles.postTitle}>{frontmatter.title}</h1>
           <div className={styles.metaInfoContainer}>
             <span>{frontmatter.date}</span>
@@ -48,6 +55,7 @@ const BlogPost = ({ data, children }) => {
           <TableOfContents toc={tableOfContents} />
           <MDXProvider components={components}>{children}</MDXProvider>
         </div>
+        <ImageLightbox containerRef={postRef} />
       </article>
     </Layout>
   );
