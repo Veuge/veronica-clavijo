@@ -30,5 +30,7 @@
   "code_editor": "Editor de Código",
   "browser": "Navegador",
   "notes": "Notas y Base de Conocimientos",
-  "table_of_contents": "En esta página"
+  "table_of_contents": "En esta página",
+  "image_viewer": "Visor de imágenes",
+  "close": "Cerrar"
 }
