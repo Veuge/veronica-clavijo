@@ -69,12 +69,20 @@
       }
     }
 
+    // Text and underline share the same green so links read as one element.
     a {
-      color: var(--white);
-      opacity: 0.8;
+      color: var(--mainGreen);
       font-weight: bold;
       text-decoration: underline;
-      text-decoration-color: var(--mainGreen);
+      text-decoration-color: currentColor;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 0.2em;
+      transition: text-decoration-thickness 0.15s ease;
+
+      &:hover,
+      &:focus-visible {
+        text-decoration-thickness: 2px;
+      }
     }
 
     p,
