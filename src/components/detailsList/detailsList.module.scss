@@ -1,0 +1,60 @@
+@use "../../styles/variables.scss";
+
+// Grid keeps each term on the same row as its description, even when
+// either side wraps onto several lines.
+.list {
+  display: grid;
+  grid-template-columns: 1fr;
+  width: 100%;
+  margin: 0;
+  line-height: 1.8;
+
+  // Category label: small caps-style.
+  dt {
+    color: var(--white);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    line-height: 1.4;
+    padding-top: 0.9em;
+    border-top: 1px solid var(--otherGray);
+  }
+
+  dt:first-of-type {
+    border-top: none;
+  }
+
+  // Value: regular body text.
+  dd {
+    color: var(--white);
+    margin: 0;
+    padding-block: 0.2em 0.9em;
+    overflow-wrap: anywhere;
+  }
+}
+
+@media (min-width: variables.$tablet) {
+  // Wide enough for two columns: term on the left, description on the right.
+  .list {
+    grid-template-columns: minmax(0, 32%) minmax(0, 1fr);
+    column-gap: 1.5em;
+
+    // Each row gets a full-width divider: both cells share the top border.
+    dt,
+    dd {
+      padding-block: 0.8em;
+      border-top: 1px solid var(--otherGray);
+    }
+
+    dt {
+      // Nudge the smaller label onto the value's text baseline.
+      padding-top: calc(0.8em + 0.5rem);
+    }
+
+    dt:first-of-type,
+    dt:first-of-type + dd {
+      border-top: none;
+    }
+  }
+}

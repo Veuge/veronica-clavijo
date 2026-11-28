@@ -32,5 +32,9 @@
   "notes": "Notes and Knowledge Base",
   "table_of_contents": "On this page",
   "image_viewer": "Image viewer",
-  "close": "Close"
+  "close": "Close",
+  "project_details": "Details",
+  "project_stack": "Stack",
+  "project_repo": "Repository",
+  "project_live": "Live"
 }

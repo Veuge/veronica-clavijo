@@ -19,13 +19,14 @@ export default function Navbar() {
         >
           {t("blog_section")}
         </Link>
-        {/* <Link
+        <Link
           className={composeClasses(styles.navLink, styles.navLinkRed)}
           to="/projects"
           activeClassName={styles.activeNavLink}
+          partiallyActive
         >
-          Proyectos
-        </Link> */}
+          {t("projects_section")}
+        </Link>
         <Link
           className={composeClasses(styles.navLink, styles.navLinkBlue)}
           to="/whoami"
@@ -33,7 +34,9 @@ export default function Navbar() {
         >
           $ whoami
         </Link>
-        <LanguageSwitcher />
+        <div className={styles.languageSwitcher}>
+          <LanguageSwitcher />
+        </div>
       </div>
     </nav>
   );

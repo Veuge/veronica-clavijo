@@ -28,6 +28,10 @@ module.exports = {
       resolve: `gatsby-source-filesystem`,
       options: { name: `blog`, path: `${__dirname}/src/content/blog` },
     },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: { name: `projects`, path: `${__dirname}/src/content/projects` },
+    },
     `gatsby-plugin-image`,
     `gatsby-plugin-sharp`,
     `gatsby-transformer-sharp`, // Needed for dynamic images
