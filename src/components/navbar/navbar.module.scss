@@ -2,6 +2,8 @@
 
 // Mobile
 .navbar {
+  // Anchor for the language switcher, which sits in the top-right corner on mobile.
+  position: relative;
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -15,6 +17,7 @@
     padding: 8px;
 
     .navLink {
+      white-space: nowrap;
       padding: 8px 7px;
       color: #fff;
       text-decoration: none;
@@ -61,8 +64,21 @@
   }
 }
 
+// Mobile: out of the links row (it squeezed "$ whoami" onto two lines and pushed
+// "ES" off-screen), pinned to the top-right corner next to the site title.
+.languageSwitcher {
+  position: absolute;
+  top: 4px;
+  right: 0;
+}
+
 @media (min-width: 767px) {
   .navbar {
     flex-direction: row;
+  }
+
+  // Wide screens: back in the links row, after "$ whoami".
+  .languageSwitcher {
+    position: static;
   }
 }

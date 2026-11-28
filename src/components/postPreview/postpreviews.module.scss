@@ -3,9 +3,8 @@
 .postPreviews {
   max-inline-size: 70ch;
 
+  // Border and padding come from PreviewCard.
   .postPreviewContainer {
-    padding: 8px 15px;
-    border: 1px solid var(--otherGray);
     margin-bottom: 10px;
 
     h1 {
