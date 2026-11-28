@@ -3,6 +3,7 @@ import { graphql, useStaticQuery } from "gatsby";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import { Trans, useTranslation } from "react-i18next";
 
+import DetailsList from "../detailsList/DetailsList";
 import * as classNames from "./presentation.module.scss";
 
 const PresentationExtended = () => {
@@ -59,66 +60,55 @@ const PresentationExtended = () => {
             <Trans i18nKey="whoami_p3" />
           </h3>
         }
-        <dl>
-          <dt>
-            <Trans i18nKey="operating_system" />
-          </dt>
-          <dd>Debian 11 (bullseye)</dd>
-
-          <dt>
-            <Trans i18nKey="desktop_environment" />
-          </dt>
-          <dd>XFCE 4.16</dd>
-
-          <dt>Terminal</dt>
-          <dd>
-            <Trans
-              i18nKey="terminal"
-              components={[
-                <a
-                  key="0"
-                  href={"https://github.com/Veuge/Configuration-files/blob/master/tmux.conf"}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  esta
-                </a>,
-              ]}
-            />
-          </dd>
-
-          <dt>
-            <Trans i18nKey="code_editor" />
-          </dt>
-          <dd>
-            VS Code +{" "}
-            <a
-              href="https://github.com/daltonmenezes/aura-theme"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Aura Theme
-            </a>{" "}
-            +{" "}
-            <a
-              href="https://www.jetbrains.com/lp/mono/"
-              target="_blank"
-              rel="noreferrer"
-            >
-              JetBrains Mono
-            </a>
-          </dd>
-
-          <dt>
-            <Trans i18nKey="browser" />
-          </dt>
-          <dd>Brave</dd>
-
-          <dt>
-            <Trans i18nKey="notes" />
-          </dt>
-          <dd>Notion</dd>
-        </dl>
+        <DetailsList
+          items={[
+            { term: <Trans i18nKey="operating_system" />, description: "Debian 11 (bullseye)" },
+            { term: <Trans i18nKey="desktop_environment" />, description: "XFCE 4.16" },
+            {
+              term: "Terminal",
+              description: (
+                <Trans
+                  i18nKey="terminal"
+                  components={[
+                    <a
+                      key="0"
+                      href={"https://github.com/Veuge/Configuration-files/blob/master/tmux.conf"}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      esta
+                    </a>,
+                  ]}
+                />
+              ),
+            },
+            {
+              term: <Trans i18nKey="code_editor" />,
+              description: (
+                <>
+                  VS Code +{" "}
+                  <a
+                    href="https://github.com/daltonmenezes/aura-theme"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Aura Theme
+                  </a>{" "}
+                  +{" "}
+                  <a
+                    href="https://www.jetbrains.com/lp/mono/"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    JetBrains Mono
+                  </a>
+                </>
+              ),
+            },
+            { term: <Trans i18nKey="browser" />, description: "Brave" },
+            { term: <Trans i18nKey="notes" />, description: "Notion" },
+          ]}
+        />
       </div>
     </div>
   );

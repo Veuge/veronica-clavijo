@@ -1,5 +1,15 @@
 export const composeClasses = (...args) => args.filter(Boolean).join(" ");
 
+// MDX content: `index.es.mdx` is the Spanish version, `index.mdx` the English one.
+export const isSpanishFile = (contentFilePath) => contentFilePath.endsWith(".es.mdx");
+
+// Keeps only the MDX nodes (allMdx edges) written in `language`.
+export const filterByLanguage = (edges, language) =>
+  edges.filter(({ node }) => isSpanishFile(node.internal.contentFilePath) === (language === "es"));
+
+// The Spanish file's directory slug ends in ".es/": both languages share one URL slug.
+export const normalizeSlug = (slug) => slug.replace(/\.es\/$/, "/");
+
 export const HOME = "home";
 export const POSTS = "posts";
 export const PROJECTS = "projects";

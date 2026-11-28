@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { graphql, useStaticQuery } from "gatsby";
-import { Link, useI18next, useTranslation } from "gatsby-plugin-react-i18next";
+import { useI18next, useTranslation } from "gatsby-plugin-react-i18next";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsisV } from "@fortawesome/free-solid-svg-icons";
 
 import Tag from "../tag/Tag";
+import PreviewCard from "../previewCard/PreviewCard";
+import { filterByLanguage, normalizeSlug } from "../../helpers";
 import * as styles from "./postpreviews.module.scss";
 
 export default function PostPreview({ location }) {
@@ -20,7 +22,10 @@ export default function PostPreview({ location }) {
 
   const { allMdx } = useStaticQuery(graphql`
     query PostPreviews {
-      allMdx(sort: { frontmatter: { date: DESC } }) {
+      allMdx(
+        filter: { fields: { collection: { eq: "blog" } } }
+        sort: { frontmatter: { date: DESC } }
+      ) {
         edges {
           node {
             id
@@ -44,10 +49,7 @@ export default function PostPreview({ location }) {
   `);
 
   // Show only posts matching the active language
-  const posts = allMdx.edges.filter(({ node }) => {
-    const isSpanish = node.internal.contentFilePath.endsWith(".es.mdx");
-    return language === "es" ? isSpanish : !isSpanish;
-  });
+  const posts = filterByLanguage(allMdx.edges, language);
 
   // Tags used by this language's posts, most used first, with how many posts use each
   const counts = {};
@@ -63,9 +65,6 @@ export default function PostPreview({ location }) {
   const visiblePosts = activeTag
     ? posts.filter(({ node }) => (node.frontmatter.tags || []).includes(activeTag))
     : posts;
-
-  // Normalize slug — remove .es suffix if present
-  const getSlug = (node) => node.fields.slug.replace(/\.es\/$/, "/");
 
   return (
     <div className={styles.postPreviews}>
@@ -95,37 +94,36 @@ export default function PostPreview({ location }) {
       )}
 
       {visiblePosts.map(({ node }) => (
-        <Link
-          to={`/posts${getSlug(node)}`}
+        <PreviewCard
+          to={`/posts${normalizeSlug(node.fields.slug)}`}
           language={language}
           key={node.id}
+          className={styles.postPreviewContainer}
         >
-          <article className={styles.postPreviewContainer}>
-            <h1>{node.frontmatter.title}</h1>
-            <h3>{node.frontmatter.description}</h3>
-            <div className={styles.footerContainer}>
-              <span className={styles.date}>
-                {t("posted_on")}{" "}
-                {language === "es" ? node.frontmatter.dateEs : node.frontmatter.dateEn}
-              </span>
-              {node.frontmatter.tags?.length > 0 && (
-                <>
-                  <FontAwesomeIcon
-                    icon={faEllipsisV}
-                    className={styles.separatorIcon}
+          <h1>{node.frontmatter.title}</h1>
+          <h3>{node.frontmatter.description}</h3>
+          <div className={styles.footerContainer}>
+            <span className={styles.date}>
+              {t("posted_on")}{" "}
+              {language === "es" ? node.frontmatter.dateEs : node.frontmatter.dateEn}
+            </span>
+            {node.frontmatter.tags?.length > 0 && (
+              <>
+                <FontAwesomeIcon
+                  icon={faEllipsisV}
+                  className={styles.separatorIcon}
+                />
+                {node.frontmatter.tags.map((tag) => (
+                  <Tag
+                    key={tag}
+                    tag={tag}
+                    active={tag === activeTag}
                   />
-                  {node.frontmatter.tags.map((tag) => (
-                    <Tag
-                      key={tag}
-                      tag={tag}
-                      active={tag === activeTag}
-                    />
-                  ))}
-                </>
-              )}
-            </div>
-          </article>
-        </Link>
+                ))}
+              </>
+            )}
+          </div>
+        </PreviewCard>
       ))}
     </div>
   );
