@@ -7,11 +7,11 @@ const DEFAULT_LANGUAGE = "es";
 const COLLECTIONS = {
   blog: {
     template: path.resolve(`./src/templates/BlogPost.jsx`),
-    basePath: "/posts"
+    basePath: "/posts",
   },
   projects: {
     template: path.resolve(`./src/templates/Project.jsx`),
-    basePath: "/projects"
+    basePath: "/projects",
   },
 };
 
