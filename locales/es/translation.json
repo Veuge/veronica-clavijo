@@ -32,5 +32,9 @@
   "notes": "Notas y Base de Conocimientos",
   "table_of_contents": "En esta página",
   "image_viewer": "Visor de imágenes",
-  "close": "Cerrar"
+  "close": "Cerrar",
+  "project_details": "Detalles",
+  "project_stack": "Stack",
+  "project_repo": "Repositorio",
+  "project_live": "En vivo"
 }
