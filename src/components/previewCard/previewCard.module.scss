@@ -1,0 +1,27 @@
+.link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.card {
+  height: 100%;
+  border: 1px solid var(--otherGray);
+  transition: border-color 0.15s ease;
+
+  .link:hover &,
+  .link:focus-visible & {
+    // Each section sets --accent; falls back to the Notes green.
+    border-color: var(--accent, var(--mainGreen));
+  }
+}
+
+.image {
+  display: block;
+  width: 100%;
+  border-bottom: 1px solid var(--otherGray);
+}
+
+.body {
+  padding: 8px 15px;
+}

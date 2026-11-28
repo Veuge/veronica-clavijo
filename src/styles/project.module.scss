@@ -1,0 +1,30 @@
+// Project details page; the body reuses blogpost.module.scss.
+
+.cover {
+  display: block;
+  margin: 0 auto 1.5rem;
+  border-radius: 8px;
+  border: 1px solid var(--otherGray);
+  box-shadow: 0 0 0 8px rgba(0, 0, 0, 0.2);
+}
+
+// A <div>, not <header>: layout.module.scss styles every <header> as the navbar.
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  column-gap: 16px;
+  margin-bottom: 0.5rem;
+}
+
+.date {
+  color: var(--lightGray);
+  font-size: 0.8em;
+  text-transform: capitalize;
+}
+
+// Space between the Details list and the project's MDX body.
+.details {
+  margin-bottom: 2rem;
+}
